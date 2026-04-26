@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 4: Định dạng & Tùy chỉnh Pivot Table - Styles, Report Layout, Subtotals, Grand Totals">
+  <title>Chương 4: Định dạng & Tùy chỉnh</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html" class="active"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 04</div>
+        <h1>Định dạng & Tùy chỉnh</h1>
+        <p>Làm cho Pivot Table đẹp mắt, chuyên nghiệp và dễ đọc hơn với Styles, Report Layout, Subtotals và Number Format.</p>
+      </div>
+
+      <!-- 4.1 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎨</span> 4.1 PivotTable Styles</h2>
+        <p>Excel cung cấp hàng chục style có sẵn để thay đổi giao diện Pivot Table chỉ bằng 1 click:</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Click vào Pivot Table → chuyển sang tab <strong>Design</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Trong nhóm <strong>PivotTable Styles</strong>, hover qua các style để xem preview</p></div></div>
+          <div class="step"><div class="step-content"><p>Click chọn style phù hợp (Light, Medium, Dark)</p></div></div>
+        </div>
+
+        <div class="card">
+          <h3>📋 Các nhóm Style</h3>
+          <table class="styled-table">
+            <thead><tr><th>Nhóm</th><th>Đặc điểm</th><th>Khi nào dùng</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Light</strong></td><td>Nền sáng, viền nhẹ</td><td>In ấn, báo cáo chính thức</td></tr>
+              <tr><td><strong>Medium</strong></td><td>Có màu nền header, xen kẽ màu hàng</td><td>Trình bày, slide, dashboard</td></tr>
+              <tr><td><strong>Dark</strong></td><td>Nền tối, chữ sáng</td><td>Màn hình lớn, dashboard tối</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>✅ Tùy chọn bổ sung trong Design tab</h3>
+          <ul>
+            <li><strong>Row Headers:</strong> Đậm hàng tiêu đề</li>
+            <li><strong>Column Headers:</strong> Đậm cột tiêu đề</li>
+            <li><strong>Banded Rows:</strong> Xen kẽ màu hàng (dễ đọc)</li>
+            <li><strong>Banded Columns:</strong> Xen kẽ màu cột</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 4.2 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📐</span> 4.2 Report Layout</h2>
+        <p>Report Layout quyết định <strong>cách sắp xếp</strong> dữ liệu trong Pivot Table. Có 3 dạng:</p>
+
+        <div class="card">
+          <h3>📦 Compact Form (Mặc định)</h3>
+          <p>Tất cả Row fields gộp vào <strong>1 cột duy nhất</strong>, với thụt lề phân cấp. Tiết kiệm không gian, phù hợp khi có nhiều field.</p>
+          <table class="excel-table">
+            <thead><tr><th>Row Labels</th><th>Sum of ThanhTien</th></tr></thead>
+            <tbody>
+              <tr><td><strong>▼ Bắc</strong></td><td class="number"><strong>50,000,000</strong></td></tr>
+              <tr><td>&nbsp;&nbsp;&nbsp;Laptop</td><td class="number">45,000,000</td></tr>
+              <tr><td>&nbsp;&nbsp;&nbsp;Tai nghe</td><td class="number">5,000,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>📋 Outline Form</h3>
+          <p>Mỗi Row field có <strong>cột riêng</strong>, nhãn nhóm ở đầu nhóm. Rõ ràng hơn, dễ đọc.</p>
+          <table class="excel-table">
+            <thead><tr><th>KhuVuc</th><th>SanPham</th><th>Sum of ThanhTien</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Bắc</strong></td><td></td><td class="number"><strong>50,000,000</strong></td></tr>
+              <tr><td></td><td>Laptop</td><td class="number">45,000,000</td></tr>
+              <tr><td></td><td>Tai nghe</td><td class="number">5,000,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>📊 Tabular Form</h3>
+          <p>Mỗi field 1 cột riêng, nhãn nhóm <strong>lặp lại ở mỗi hàng</strong>. Giống bảng dữ liệu thông thường, phù hợp để xuất ra CSV/copy.</p>
+          <table class="excel-table">
+            <thead><tr><th>KhuVuc</th><th>SanPham</th><th>Sum of ThanhTien</th></tr></thead>
+            <tbody>
+              <tr><td>Bắc</td><td>Laptop</td><td class="number">45,000,000</td></tr>
+              <tr><td>Bắc</td><td>Tai nghe</td><td class="number">5,000,000</td></tr>
+              <tr><td>Nam</td><td>Chuột</td><td class="number">4,500,000</td></tr>
+              <tr><td>Nam</td><td>Điện thoại</td><td class="number">64,000,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Click Pivot Table → tab <strong>Design</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Click <strong>Report Layout</strong> → chọn Compact/Outline/Tabular</p></div></div>
+          <div class="step"><div class="step-content"><p>Trong Tabular Form, có thể chọn thêm <strong>"Repeat All Item Labels"</strong></p></div></div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo thực tế:</strong> Dùng <strong>Tabular Form + Repeat All Item Labels</strong> khi cần copy dữ liệu từ Pivot Table vào bảng mới hoặc xuất CSV — vì mỗi hàng sẽ có đầy đủ thông tin.</div>
+        </div>
+      </section>
+
+      <!-- 4.3 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔢</span> 4.3 Number Format</h2>
+        <p>Mặc định, số trong Pivot Table không có định dạng. Hãy format cho chuyên nghiệp:</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Click chuột phải vào ô số bất kỳ trong Values</p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn <strong>Number Format...</strong> (hoặc Value Field Settings → Number Format)</p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn <strong>Number</strong> → Decimal places: 0 → Tick ✅ "Use 1000 Separator"</p></div></div>
+          <div class="step"><div class="step-content"><p>Nhấn OK → Tất cả ô values được format đồng loạt</p></div></div>
+        </div>
+
+        <div class="card">
+          <h3>📊 Các format phổ biến</h3>
+          <table class="styled-table">
+            <thead><tr><th>Loại</th><th>Format code</th><th>Ví dụ</th></tr></thead>
+            <tbody>
+              <tr><td>Số nguyên + dấu phẩy</td><td><code>#,##0</code></td><td>1,234,567</td></tr>
+              <tr><td>Tiền VNĐ</td><td><code>#,##0 "₫"</code></td><td>1,234,567 ₫</td></tr>
+              <tr><td>Phần trăm</td><td><code>0.0%</code></td><td>45.5%</td></tr>
+              <tr><td>Triệu đồng</td><td><code>#,##0,, "Tr"</code></td><td>1 Tr</td></tr>
+              <tr><td>Số âm đỏ</td><td><code>#,##0;[Red]-#,##0</code></td><td><span style="color:var(--accent-red)">-1,234</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 4.4 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📏</span> 4.4 Subtotals & Grand Totals</h2>
+
+        <div class="card">
+          <h3>📐 Subtotals (Tổng phụ)</h3>
+          <ul>
+            <li><strong>Bật/tắt:</strong> Design tab → Subtotals → Show/Don't Show</li>
+            <li><strong>Vị trí:</strong> Show at Top of Group / Show at Bottom of Group</li>
+            <li>Subtotals tự hiện khi có <strong>nhiều Row fields</strong> (tổng cho mỗi nhóm chính)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>📊 Grand Totals (Tổng cộng)</h3>
+          <ul>
+            <li><strong>4 tùy chọn:</strong></li>
+            <li>Off for Rows and Columns — Tắt tất cả</li>
+            <li>On for Rows and Columns — Bật tất cả</li>
+            <li>On for Rows Only — Chỉ tổng hàng (cột Grand Total bên phải)</li>
+            <li>On for Columns Only — Chỉ tổng cột (hàng Grand Total bên dưới)</li>
+          </ul>
+        </div>
+
+        <div class="info-box note">
+          <span class="box-icon">📌</span>
+          <div><strong>Ghi nhớ:</strong> Khi làm Dashboard, thường <strong>tắt Grand Totals</strong> vì biểu đồ sẽ tự hiển thị tổng. Khi in báo cáo, nên <strong>bật Subtotals + Grand Totals</strong>.</div>
+        </div>
+      </section>
+
+      <!-- 4.5 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 4.5 Bài tập thực hành</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 4.1 – Tạo báo cáo nhân sự đẹp mắt</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Bạn là trợ lý HR, cần tạo báo cáo nhân sự cho sếp.</p>
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo bảng dữ liệu nhân sự: <strong>MaNV, HoTen, PhongBan, ChucVu, GioiTinh, Luong</strong> (15+ dòng)</li>
+                <li>Tạo Pivot Table: Rows = PhongBan + ChucVu, Values = Count of MaNV + Average of Luong</li>
+                <li>Áp dụng style <strong>Medium 14</strong> (xanh lá)</li>
+                <li>Chuyển sang <strong>Outline Form</strong> + Repeat All Item Labels</li>
+                <li>Format lương: <code>#,##0 "₫"</code></li>
+                <li>Bật Subtotals ở Bottom, Grand Totals cho cả Rows & Columns</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo Table nhân sự → <kbd>Ctrl + T</kbd> → đặt tên <code>tblNhanSu</code></p></div></div>
+                <div class="step"><div class="step-content"><p>Insert → PivotTable → New Worksheet</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo PhongBan → Rows, sau đó kéo ChucVu xuống dưới PhongBan trong Rows</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo MaNV → Values (tự động Count), kéo Luong → Values (chuyển sang Average)</p></div></div>
+                <div class="step"><div class="step-content"><p>Design → Styles → chọn Medium 14</p></div></div>
+                <div class="step"><div class="step-content"><p>Design → Report Layout → <strong>Show in Outline Form</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Design → Report Layout → <strong>Repeat All Item Labels</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Click phải vào ô lương → Number Format → <code>#,##0 "₫"</code></p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong4">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong3.html"><small>← Chương trước</small> Cấu trúc & Kéo thả</a>
+        <a href="chuong5.html"><small>Chương tiếp →</small> Tính toán nâng cao</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

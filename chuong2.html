@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 2: Tạo Pivot Table đầu tiên - Các bước tạo từ A-Z, giao diện PivotTable Fields">
+  <title>Chương 2: Tạo Pivot Table đầu tiên</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">PT</div>
+        <h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2>
+      </div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a>
+        <div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html" class="active"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 02</div>
+        <h1>Tạo Pivot Table đầu tiên</h1>
+        <p>Hướng dẫn từng bước tạo Pivot Table từ A đến Z, làm quen với giao diện PivotTable Fields.</p>
+      </div>
+
+      <!-- 2.1 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🚀</span> 2.1 Các bước tạo Pivot Table</h2>
+        <p>Giả sử bạn đã có bảng dữ liệu bán hàng đã chuẩn bị ở Chương 1. Hãy làm theo các bước sau:</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p><strong>Chọn vùng dữ liệu:</strong> Click vào bất kỳ ô nào trong bảng dữ liệu (hoặc Table)</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Mở lệnh:</strong> Vào tab <strong>Insert</strong> → Click <strong>PivotTable</strong> (hoặc <kbd>Alt + N + V</kbd>)</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Chọn nguồn:</strong> Excel tự nhận diện vùng dữ liệu/Table → Kiểm tra lại cho đúng</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Chọn vị trí:</strong> <em>New Worksheet</em> (sheet mới) hoặc <em>Existing Worksheet</em> (sheet hiện tại)</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Nhấn OK:</strong> Pivot Table trống xuất hiện kèm panel <strong>PivotTable Fields</strong> bên phải</p></div></div>
+        </div>
+
+        <div class="info-box note">
+          <span class="box-icon">📌</span>
+          <div><strong>Lưu ý:</strong> Nếu dữ liệu nguồn là Table (Ctrl+T), Excel sẽ hiển thị tên Table thay vì vùng ô (ví dụ: <code>tblBanHang</code>). Đây là cách tốt nhất vì Table tự động mở rộng.</div>
+        </div>
+      </section>
+
+      <!-- 2.2 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🖥️</span> 2.2 Giao diện PivotTable Fields</h2>
+        <p>Sau khi tạo, panel <strong>PivotTable Fields</strong> xuất hiện ở bên phải màn hình. Đây là "bộ não" của Pivot Table.</p>
+
+        <div class="card">
+          <h3>📋 Cấu trúc panel PivotTable Fields</h3>
+          <p>Panel gồm 2 phần chính:</p>
+          <ol>
+            <li><strong>Danh sách Fields (phía trên):</strong> Tất cả các cột trong dữ liệu nguồn hiển thị dưới dạng checkbox</li>
+            <li><strong>4 vùng kéo thả (phía dưới):</strong>
+              <ul>
+                <li>🔲 <strong>Filters</strong> — Lọc toàn bộ Pivot Table</li>
+                <li>📏 <strong>Columns</strong> — Tạo tiêu đề cột</li>
+                <li>📐 <strong>Rows</strong> — Tạo nhãn hàng</li>
+                <li>📊 <strong>Values</strong> — Chứa giá trị tính toán (Sum, Count...)</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+
+        <div class="card">
+          <h3>🎯 Cách kéo thả Fields</h3>
+          <table class="styled-table">
+            <thead><tr><th>Thao tác</th><th>Cách làm</th></tr></thead>
+            <tbody>
+              <tr><td>Thêm field vào vùng</td><td>Kéo thả field từ danh sách vào vùng mong muốn, hoặc ✅ tick checkbox</td></tr>
+              <tr><td>Xóa field khỏi vùng</td><td>Kéo field ra khỏi vùng, hoặc bỏ tick ☐ checkbox</td></tr>
+              <tr><td>Di chuyển field</td><td>Kéo thả field từ vùng này sang vùng khác</td></tr>
+              <tr><td>Thay đổi thứ tự</td><td>Kéo field lên/xuống trong cùng một vùng</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo:</strong> Khi tick checkbox, Excel tự quyết định vùng: trường Text → Rows, trường Number → Values (Sum). Nhưng tốt nhất bạn nên <strong>kéo thả thủ công</strong> để kiểm soát hoàn toàn.</div>
+        </div>
+      </section>
+
+      <!-- 2.3 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📊</span> 2.3 Ví dụ thực hành: Báo cáo doanh thu</h2>
+        <p>Sử dụng dữ liệu bán hàng từ Chương 1, hãy tạo báo cáo <strong>"Tổng doanh thu theo sản phẩm"</strong>:</p>
+
+        <h3>Dữ liệu nguồn (trích)</h3>
+        <table class="excel-table">
+          <thead><tr><th>MaDH</th><th>NgayBan</th><th>KhuVuc</th><th>SanPham</th><th>SoLuong</th><th>DonGia</th><th>ThanhTien</th></tr></thead>
+          <tbody>
+            <tr><td>DH001</td><td>05/01/2024</td><td>Bắc</td><td>Laptop</td><td class="number">2</td><td class="number">15,000,000</td><td class="number">30,000,000</td></tr>
+            <tr><td>DH002</td><td>08/01/2024</td><td>Nam</td><td>Điện thoại</td><td class="number">5</td><td class="number">8,000,000</td><td class="number">40,000,000</td></tr>
+            <tr><td>DH003</td><td>12/01/2024</td><td>Trung</td><td>Tablet</td><td class="number">3</td><td class="number">10,000,000</td><td class="number">30,000,000</td></tr>
+            <tr><td>DH004</td><td>15/02/2024</td><td>Bắc</td><td>Laptop</td><td class="number">1</td><td class="number">15,000,000</td><td class="number">15,000,000</td></tr>
+            <tr><td>DH005</td><td>20/02/2024</td><td>Nam</td><td>Điện thoại</td><td class="number">3</td><td class="number">8,000,000</td><td class="number">24,000,000</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Cách tạo Pivot Table</h3>
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Chọn bảng dữ liệu → <strong>Insert → PivotTable</strong> → New Worksheet → OK</p></div></div>
+          <div class="step"><div class="step-content"><p>Kéo <strong>"SanPham"</strong> vào vùng <strong>Rows</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Kéo <strong>"ThanhTien"</strong> vào vùng <strong>Values</strong> (tự động chọn Sum)</p></div></div>
+        </div>
+
+        <h3>Kết quả Pivot Table</h3>
+        <table class="excel-table">
+          <thead><tr><th>Row Labels</th><th>Sum of ThanhTien</th></tr></thead>
+          <tbody>
+            <tr><td>Điện thoại</td><td class="number highlight">64,000,000</td></tr>
+            <tr><td>Laptop</td><td class="number highlight">45,000,000</td></tr>
+            <tr><td>Tablet</td><td class="number highlight">30,000,000</td></tr>
+            <tr><td><strong>Grand Total</strong></td><td class="number"><strong>139,000,000</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Chỉ 3 bước!</strong> Thay vì viết công thức <code>=SUMIFS(ThanhTien, SanPham, "Laptop")</code> cho từng sản phẩm, Pivot Table tự tính tất cả.</div>
+        </div>
+      </section>
+
+      <!-- 2.4 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔄</span> 2.4 Refresh & Cập nhật dữ liệu</h2>
+        <p>Khi dữ liệu nguồn thay đổi (thêm, sửa, xóa), Pivot Table <strong>không tự cập nhật</strong>. Bạn cần Refresh:</p>
+
+        <div class="card">
+          <h3>🔄 Các cách Refresh Pivot Table</h3>
+          <table class="styled-table">
+            <thead><tr><th>Cách</th><th>Thao tác</th><th>Phạm vi</th></tr></thead>
+            <tbody>
+              <tr><td>Cách 1</td><td>Click phải vào Pivot Table → <strong>Refresh</strong></td><td>PT hiện tại</td></tr>
+              <tr><td>Cách 2</td><td><kbd>Alt + F5</kbd></td><td>PT hiện tại</td></tr>
+              <tr><td>Cách 3</td><td><kbd>Ctrl + Alt + F5</kbd></td><td>Tất cả PT trong workbook</td></tr>
+              <tr><td>Cách 4</td><td>Tab <strong>PivotTable Analyze</strong> → <strong>Refresh</strong></td><td>PT hiện tại hoặc All</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box warning">
+          <span class="box-icon">⚠️</span>
+          <div><strong>Quan trọng:</strong> Nếu dữ liệu nguồn là Range (không phải Table), khi thêm dòng mới ngoài range cũ, bạn phải vào <strong>PivotTable Analyze → Change Data Source</strong> để mở rộng vùng dữ liệu. Dùng Table sẽ tránh được vấn đề này!</div>
+        </div>
+      </section>
+
+      <!-- 2.5 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">⚙️</span> 2.5 Tùy chọn khi tạo Pivot Table</h2>
+
+        <div class="card">
+          <h3>📋 Hộp thoại Create PivotTable</h3>
+          <table class="styled-table">
+            <thead><tr><th>Tùy chọn</th><th>Giải thích</th><th>Khi nào dùng</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Table/Range</strong></td><td>Dữ liệu từ Table hoặc vùng cells trong workbook</td><td>Trường hợp phổ biến nhất</td></tr>
+              <tr><td><strong>External data source</strong></td><td>Dữ liệu từ nguồn ngoài (SQL, Access, CSV...)</td><td>Khi dữ liệu nằm ngoài Excel</td></tr>
+              <tr><td><strong>Data Model</strong></td><td>Sử dụng Data Model (Power Pivot)</td><td>Khi cần liên kết nhiều bảng (Chương 8)</td></tr>
+              <tr><td><strong>New Worksheet</strong></td><td>Tạo PT ở sheet mới</td><td>Mặc định, khuyến nghị cho PT đầu tiên</td></tr>
+              <tr><td><strong>Existing Worksheet</strong></td><td>Tạo PT ở vị trí chỉ định</td><td>Khi muốn đặt nhiều PT cạnh nhau</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 2.6 Bài tập -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 2.6 Bài tập thực hành</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 2.1 – Tạo Pivot Table đầu tiên</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Mở file <strong>DuLieuBanHang.xlsx</strong> từ Bài tập 1.1</li>
+                <li>Tạo Pivot Table ở sheet mới</li>
+                <li>Tạo báo cáo <strong>"Tổng doanh thu theo khu vực"</strong> (KhuVuc → Rows, ThanhTien → Values)</li>
+                <li>Thêm dòng dữ liệu mới vào bảng nguồn, rồi <strong>Refresh</strong> Pivot Table</li>
+                <li>Khu vực nào có doanh thu cao nhất?</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Mở file → Click ô bất kỳ trong Table</p></div></div>
+                <div class="step"><div class="step-content"><p><strong>Insert → PivotTable</strong> → chọn <em>New Worksheet</em> → OK</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo <strong>KhuVuc</strong> vào Rows</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo <strong>ThanhTien</strong> vào Values</p></div></div>
+                <div class="step"><div class="step-content"><p>Quay lại sheet dữ liệu → Thêm 1 dòng mới</p></div></div>
+                <div class="step"><div class="step-content"><p>Click trở lại Pivot Table → <kbd>Alt + F5</kbd> (Refresh)</p></div></div>
+              </div>
+              <p>Pivot Table sẽ tự cập nhật với dòng mới. Khu vực có doanh thu cao nhất sẽ hiển thị rõ ở bảng kết quả.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 2.2 – Pivot Table nhiều fields</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo Pivot Table mới từ cùng bảng dữ liệu</li>
+                <li>Kéo <strong>KhuVuc</strong> vào Rows, <strong>SanPham</strong> cũng vào Rows (dưới KhuVuc)</li>
+                <li>Kéo <strong>ThanhTien</strong> vào Values</li>
+                <li>Kéo <strong>SoLuong</strong> cũng vào Values</li>
+                <li>Quan sát: Pivot Table hiển thị cả tổng tiền và tổng số lượng theo khu vực → sản phẩm</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans2')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans2">
+              <h4>✅ Kết quả mong đợi:</h4>
+              <table class="excel-table">
+                <thead><tr><th>KhuVuc</th><th>SanPham</th><th>Sum of ThanhTien</th><th>Sum of SoLuong</th></tr></thead>
+                <tbody>
+                  <tr><td rowspan="2"><strong>Bắc</strong></td><td>Laptop</td><td class="number">45,000,000</td><td class="number">3</td></tr>
+                  <tr><td>Tai nghe</td><td class="number">5,000,000</td><td class="number">10</td></tr>
+                  <tr><td rowspan="2"><strong>Nam</strong></td><td>Chuột</td><td class="number">4,500,000</td><td class="number">15</td></tr>
+                  <tr><td>Điện thoại</td><td class="number">64,000,000</td><td class="number">8</td></tr>
+                  <tr><td><strong>Trung</strong></td><td>Tablet</td><td class="number">30,000,000</td><td class="number">3</td></tr>
+                </tbody>
+              </table>
+              <p>Khi kéo nhiều field vào cùng vùng Rows, các field tạo thành cấu trúc <strong>phân cấp</strong> (hierarchy). Field đầu tiên là nhóm chính, field sau là nhóm con.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong2">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong1.html"><small>← Chương trước</small> Giới thiệu Pivot Table</a>
+        <a href="chuong3.html"><small>Chương tiếp →</small> Cấu trúc & Kéo thả</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

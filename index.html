@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Giáo trình Excel Pivot Table toàn diện từ cơ bản đến nâng cao. Bao gồm 10 chương, bài tập thực hành, Power Pivot, Power Query và Dashboard.">
+  <title>Giáo Trình Excel Pivot Table - Từ Cơ Bản Đến Nâng Cao</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="page-wrapper">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">PT</div>
+        <h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2>
+      </div>
+      <div class="sidebar-nav">
+        <a href="index.html" class="active"><span class="nav-icon">🏠</span> Trang chủ</a>
+        <div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-badge">📊 Phiên bản 2024</div>
+        <h1>Giáo Trình Excel Pivot Table</h1>
+        <p>Hướng dẫn toàn diện từ cơ bản đến nâng cao. Bao gồm lý thuyết, bài tập thực hành có đáp án, ví dụ thực tế, Power Pivot, Power Query và Dashboard chuyên nghiệp.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">10</div><div class="label">Chương học</div></div>
+          <div class="hero-stat"><div class="num">80+</div><div class="label">Ví dụ</div></div>
+          <div class="hero-stat"><div class="num">20+</div><div class="label">Bài tập</div></div>
+          <div class="hero-stat"><div class="num">5+</div><div class="label">Dashboard</div></div>
+        </div>
+      </section>
+
+      <!-- Table of Contents -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📚</span> Mục Lục Giáo Trình</h2>
+
+        <div class="chapter-grid">
+          <a href="chuong1.html" class="chapter-card">
+            <div class="ch-icon bg-green">📘</div>
+            <div class="ch-info">
+              <h3>Chương 1: Giới thiệu Pivot Table</h3>
+              <p>Khái niệm, ứng dụng thực tế, chuẩn bị dữ liệu đúng cách</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong2.html" class="chapter-card">
+            <div class="ch-icon bg-teal">🚀</div>
+            <div class="ch-info">
+              <h3>Chương 2: Tạo Pivot Table đầu tiên</h3>
+              <p>Các bước tạo từ A-Z, giao diện PivotTable Fields</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong3.html" class="chapter-card">
+            <div class="ch-icon bg-cyan">🧩</div>
+            <div class="ch-info">
+              <h3>Chương 3: Cấu trúc & Vùng kéo thả</h3>
+              <p>Rows, Columns, Values, Filters — kéo thả linh hoạt</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong4.html" class="chapter-card">
+            <div class="ch-icon bg-purple">🎨</div>
+            <div class="ch-info">
+              <h3>Chương 4: Định dạng & Tùy chỉnh</h3>
+              <p>Styles, Report Layout, Subtotals, Grand Totals</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong5.html" class="chapter-card">
+            <div class="ch-icon bg-blue">🔢</div>
+            <div class="ch-info">
+              <h3>Chương 5: Tính toán nâng cao</h3>
+              <p>Calculated Field, Show Values As, % of Total, Running Total</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong6.html" class="chapter-card">
+            <div class="ch-icon bg-orange">🔍</div>
+            <div class="ch-info">
+              <h3>Chương 6: Lọc, Sắp xếp & Slicer</h3>
+              <p>Report Filter, Label/Value Filter, Slicer, Timeline</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong7.html" class="chapter-card">
+            <div class="ch-icon bg-pink">📊</div>
+            <div class="ch-info">
+              <h3>Chương 7: Pivot Chart</h3>
+              <p>Tạo biểu đồ từ Pivot Table, các loại chart phù hợp</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong8.html" class="chapter-card">
+            <div class="ch-icon bg-red">⚡</div>
+            <div class="ch-info">
+              <h3>Chương 8: Power Pivot & Data Model</h3>
+              <p>Relationships, DAX cơ bản, CALCULATE, SUMX</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong9.html" class="chapter-card">
+            <div class="ch-icon bg-lime">🔄</div>
+            <div class="ch-info">
+              <h3>Chương 9: Power Query kết hợp Pivot Table</h3>
+              <p>ETL, Get & Transform Data, merge nhiều nguồn</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="chuong10.html" class="chapter-card">
+            <div class="ch-icon bg-emerald">📋</div>
+            <div class="ch-info">
+              <h3>Chương 10: Dashboard thực tế</h3>
+              <p>Thiết kế Dashboard chuyên nghiệp, Sales/HR/Inventory</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+
+          <a href="bai-tap.html" class="chapter-card">
+            <div class="ch-icon bg-orange">🎯</div>
+            <div class="ch-info">
+              <h3>Bài tập Thực hành Tổng hợp</h3>
+              <p>20+ bài tập từ cơ bản đến nâng cao kèm đáp án chi tiết</p>
+            </div>
+            <span class="ch-arrow">→</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Quick Start -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🚀</span> Bắt đầu nhanh</h2>
+        <div class="card">
+          <h3>💡 Cách sử dụng giáo trình này</h3>
+          <p>Giáo trình được thiết kế để bạn có thể học theo thứ tự từ Chương 1 đến Chương 10, hoặc nhảy đến bất kỳ chương nào bạn cần. Mỗi chương đều có:</p>
+          <ul style="margin: 10px 0 0 20px; color: var(--text-secondary); font-size: 14px;">
+            <li><strong>Lý thuyết</strong> - Giải thích chi tiết với hình ảnh minh họa</li>
+            <li><strong>Ví dụ thực tế</strong> - Dữ liệu bán hàng, nhân sự, kho vận</li>
+            <li><strong>Bảng dữ liệu mẫu</strong> - Sẵn sàng thực hành ngay</li>
+            <li><strong>Bài tập</strong> - Có đáp án chi tiết từng bước</li>
+            <li><strong>Mẹo & Thủ thuật</strong> - Tăng tốc công việc hàng ngày</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Learning Path -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🗺️</span> Lộ trình học</h2>
+        <div class="card">
+          <h3>🟢 Cơ bản (Chương 1-4)</h3>
+          <p>Nắm vững nền tảng: tạo Pivot Table, kéo thả field, định dạng báo cáo. Phù hợp người mới bắt đầu.</p>
+        </div>
+        <div class="card">
+          <h3>🟡 Trung cấp (Chương 5-7)</h3>
+          <p>Tính toán nâng cao, lọc dữ liệu chuyên sâu, tạo biểu đồ Pivot Chart. Phù hợp người đã biết cơ bản.</p>
+        </div>
+        <div class="card">
+          <h3>🔴 Nâng cao (Chương 8-10)</h3>
+          <p>Power Pivot, Power Query, xây dựng Dashboard chuyên nghiệp. Phù hợp người muốn thành chuyên gia.</p>
+        </div>
+      </section>
+
+      <!-- Keyboard shortcuts -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">⌨️</span> Phím tắt Pivot Table thường dùng</h2>
+        <div class="shortcut-grid">
+          <div class="shortcut-item"><span>Tạo Pivot Table</span> <kbd>Alt + N + V</kbd></div>
+          <div class="shortcut-item"><span>Refresh dữ liệu</span> <kbd>Alt + F5</kbd></div>
+          <div class="shortcut-item"><span>Refresh tất cả</span> <kbd>Ctrl + Alt + F5</kbd></div>
+          <div class="shortcut-item"><span>Group items</span> <kbd>Alt + Shift + →</kbd></div>
+          <div class="shortcut-item"><span>Ungroup items</span> <kbd>Alt + Shift + ←</kbd></div>
+          <div class="shortcut-item"><span>Collapse field</span> <kbd>Alt + -</kbd></div>
+          <div class="shortcut-item"><span>Expand field</span> <kbd>Alt + +</kbd></div>
+          <div class="shortcut-item"><span>Hide detail</span> <kbd>Ctrl + -</kbd></div>
+          <div class="shortcut-item"><span>Show detail</span> <kbd>Ctrl + +</kbd></div>
+          <div class="shortcut-item"><span>Select toàn bộ PT</span> <kbd>Ctrl + A</kbd></div>
+          <div class="shortcut-item"><span>Move field lên</span> <kbd>Alt + ↑</kbd></div>
+          <div class="shortcut-item"><span>Move field xuống</span> <kbd>Alt + ↓</kbd></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

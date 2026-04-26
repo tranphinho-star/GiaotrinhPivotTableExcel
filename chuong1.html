@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 1: Giới thiệu Pivot Table - Khái niệm, ứng dụng thực tế, chuẩn bị dữ liệu đúng cách">
+  <title>Chương 1: Giới thiệu Pivot Table</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">PT</div>
+        <h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2>
+      </div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a>
+        <div class="nav-divider"></div>
+        <a href="chuong1.html" class="active"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 01</div>
+        <h1>Giới thiệu Pivot Table</h1>
+        <p>Tìm hiểu Pivot Table là gì, tại sao nó là công cụ phân tích dữ liệu mạnh nhất trong Excel, và cách chuẩn bị dữ liệu đúng cách.</p>
+      </div>
+
+      <!-- 1.1 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📖</span> 1.1 Pivot Table là gì?</h2>
+        <p><strong>Pivot Table</strong> (Bảng tổng hợp) là công cụ phân tích dữ liệu mạnh mẽ nhất trong Microsoft Excel. Nó cho phép bạn <strong>tóm tắt, phân tích, khám phá và trình bày</strong> dữ liệu lớn chỉ bằng vài thao tác kéo thả — không cần viết công thức phức tạp.</p>
+
+        <div class="card">
+          <h3>🔄 Tại sao gọi là "Pivot"?</h3>
+          <p>Từ "Pivot" nghĩa là "xoay". Pivot Table cho phép bạn <strong>xoay dữ liệu</strong> theo nhiều góc nhìn khác nhau: theo thời gian, theo sản phẩm, theo khu vực, theo nhân viên... chỉ bằng cách kéo thả các trường dữ liệu.</p>
+        </div>
+
+        <div class="card">
+          <h3>💡 Ví dụ dễ hiểu</h3>
+          <p>Bạn có bảng dữ liệu 10,000 đơn hàng. Thay vì dùng SUMIFS, COUNTIFS để tạo báo cáo, Pivot Table giúp bạn:</p>
+          <ul>
+            <li>Tổng doanh thu theo <strong>từng sản phẩm</strong> → kéo "Sản phẩm" vào Rows, "Doanh thu" vào Values</li>
+            <li>So sánh <strong>theo quý</strong> → kéo "Ngày" vào Columns (tự động group theo quý)</li>
+            <li>Lọc theo <strong>khu vực</strong> → kéo "Khu vực" vào Filters</li>
+          </ul>
+          <p>Tất cả chỉ trong <strong>30 giây</strong>, không cần viết bất kỳ công thức nào!</p>
+        </div>
+      </section>
+
+      <!-- 1.2 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🏢</span> 1.2 Ứng dụng thực tế trong công việc</h2>
+        <p>Pivot Table được sử dụng rộng rãi trong mọi ngành nghề:</p>
+
+        <div class="card">
+          <h3>📊 Các tình huống thực tế</h3>
+          <table class="styled-table">
+            <thead><tr><th>Ngành</th><th>Ứng dụng</th><th>Ví dụ cụ thể</th></tr></thead>
+            <tbody>
+              <tr><td>Kinh doanh</td><td>Báo cáo doanh thu</td><td>Doanh thu theo sản phẩm/tháng/vùng miền</td></tr>
+              <tr><td>Nhân sự</td><td>Phân tích nhân lực</td><td>Số nhân viên theo phòng ban/giới tính/chức vụ</td></tr>
+              <tr><td>Kho vận</td><td>Quản lý tồn kho</td><td>Tồn kho theo nhóm hàng/nhà cung cấp</td></tr>
+              <tr><td>Tài chính</td><td>Phân tích chi phí</td><td>Chi phí theo danh mục/tháng/dự án</td></tr>
+              <tr><td>Marketing</td><td>Phân tích chiến dịch</td><td>ROI theo kênh/thời gian/đối tượng</td></tr>
+              <tr><td>Sản xuất</td><td>Theo dõi sản lượng</td><td>Output theo ca/máy/sản phẩm</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Thực tế:</strong> Hơn 90% công việc phân tích dữ liệu trong Excel có thể giải quyết bằng Pivot Table. Đây là kỹ năng được các nhà tuyển dụng đánh giá cao nhất khi tuyển vị trí liên quan đến dữ liệu.</div>
+        </div>
+      </section>
+
+      <!-- 1.3 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">⚠️</span> 1.3 Chuẩn bị dữ liệu đúng cách</h2>
+        <p>Trước khi tạo Pivot Table, dữ liệu nguồn <strong>phải được chuẩn bị đúng cách</strong>. Đây là bước quan trọng nhất mà nhiều người bỏ qua.</p>
+
+        <div class="card">
+          <h3>✅ 6 Quy tắc vàng cho dữ liệu nguồn</h3>
+          <ol>
+            <li><strong>Mỗi cột là một trường dữ liệu</strong> — Tên cột rõ ràng, không trùng lặp</li>
+            <li><strong>Mỗi hàng là một bản ghi</strong> — Không để hàng trống xen giữa</li>
+            <li><strong>Không merge cells</strong> — Pivot Table không đọc được ô gộp</li>
+            <li><strong>Dữ liệu nhất quán</strong> — Cùng một cột phải cùng kiểu dữ liệu (số/text/ngày)</li>
+            <li><strong>Có dòng tiêu đề</strong> — Hàng đầu tiên phải là tên cột</li>
+            <li><strong>Không có hàng tổng ở cuối</strong> — Pivot Table tự tính tổng</li>
+          </ol>
+        </div>
+
+        <h3>❌ Ví dụ dữ liệu SAI</h3>
+        <table class="excel-table">
+          <thead><tr><th>Ngày</th><th>Sản phẩm</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead>
+          <tbody>
+            <tr><td>2024</td><td>Laptop</td><td>100</td><td>150</td><td>120</td><td>180</td></tr>
+            <tr><td></td><td>Điện thoại</td><td>200</td><td>250</td><td>230</td><td>300</td></tr>
+            <tr><td colspan="2" class="highlight"><strong>Tổng cộng</strong></td><td>300</td><td>400</td><td>350</td><td>480</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box warning">
+          <span class="box-icon">⚠️</span>
+          <div><strong>Vấn đề:</strong> Dữ liệu dạng crosstab (Q1, Q2...) + có hàng tổng + có ô trống → Pivot Table không đọc được chính xác.</div>
+        </div>
+
+        <h3>✅ Ví dụ dữ liệu ĐÚNG</h3>
+        <table class="excel-table">
+          <thead><tr><th>Ngày</th><th>Sản phẩm</th><th>Quý</th><th>Số lượng</th></tr></thead>
+          <tbody>
+            <tr><td>01/01/2024</td><td>Laptop</td><td>Q1</td><td class="number">100</td></tr>
+            <tr><td>01/01/2024</td><td>Điện thoại</td><td>Q1</td><td class="number">200</td></tr>
+            <tr><td>01/04/2024</td><td>Laptop</td><td>Q2</td><td class="number">150</td></tr>
+            <tr><td>01/04/2024</td><td>Điện thoại</td><td>Q2</td><td class="number">250</td></tr>
+            <tr><td>01/07/2024</td><td>Laptop</td><td>Q3</td><td class="number">120</td></tr>
+            <tr><td>01/07/2024</td><td>Điện thoại</td><td>Q3</td><td class="number">230</td></tr>
+          </tbody>
+        </table>
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo:</strong> Luôn chuyển dữ liệu thành <strong>Table</strong> (<kbd>Ctrl + T</kbd>) trước khi tạo Pivot Table. Table tự động mở rộng khi thêm dữ liệu mới và giúp Pivot Table cập nhật dễ dàng.</div>
+        </div>
+      </section>
+
+      <!-- 1.4 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📐</span> 1.4 Chuyển dữ liệu thành Table</h2>
+        <p>Bước quan trọng trước khi tạo Pivot Table là chuyển dữ liệu sang dạng <strong>Table</strong>:</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Chọn bất kỳ ô nào trong vùng dữ liệu</p></div></div>
+          <div class="step"><div class="step-content"><p>Nhấn <kbd>Ctrl + T</kbd> hoặc vào <strong>Insert → Table</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Excel tự động nhận diện vùng dữ liệu → Đánh dấu <strong>"My table has headers"</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Nhấn <strong>OK</strong> → Dữ liệu được chuyển thành Table với style mặc định</p></div></div>
+          <div class="step"><div class="step-content"><p>Đặt tên Table ý nghĩa trong <strong>Table Design → Table Name</strong> (ví dụ: <code>tblDonHang</code>)</p></div></div>
+        </div>
+
+        <div class="card">
+          <h3>🎯 Lợi ích của Table</h3>
+          <ul>
+            <li><strong>Tự động mở rộng:</strong> Thêm dòng mới → Table tự thêm vào</li>
+            <li><strong>Structured References:</strong> Công thức dễ đọc hơn ([@Cột] thay vì A2)</li>
+            <li><strong>Pivot Table cập nhật:</strong> Khi Refresh, Pivot Table tự lấy dữ liệu mới</li>
+            <li><strong>Filter & Sort:</strong> Table có sẵn nút filter ở header</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 1.5 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔑</span> 1.5 Các thuật ngữ cần biết</h2>
+        <table class="styled-table">
+          <thead><tr><th>Thuật ngữ</th><th>Tiếng Việt</th><th>Giải thích</th></tr></thead>
+          <tbody>
+            <tr><td><strong>PivotTable</strong></td><td>Bảng tổng hợp</td><td>Công cụ chính để phân tích dữ liệu</td></tr>
+            <tr><td><strong>Source Data</strong></td><td>Dữ liệu nguồn</td><td>Bảng dữ liệu gốc dùng để tạo PT</td></tr>
+            <tr><td><strong>Field</strong></td><td>Trường</td><td>Mỗi cột trong dữ liệu nguồn = 1 Field</td></tr>
+            <tr><td><strong>Row Labels</strong></td><td>Nhãn hàng</td><td>Các giá trị hiển thị theo hàng</td></tr>
+            <tr><td><strong>Column Labels</strong></td><td>Nhãn cột</td><td>Các giá trị hiển thị theo cột</td></tr>
+            <tr><td><strong>Values</strong></td><td>Giá trị</td><td>Các ô chứa kết quả tính toán (Sum, Count...)</td></tr>
+            <tr><td><strong>Filters</strong></td><td>Bộ lọc</td><td>Lọc toàn bộ Pivot Table theo điều kiện</td></tr>
+            <tr><td><strong>Slicer</strong></td><td>Bộ lọc trực quan</td><td>Nút bấm lọc dữ liệu theo giá trị</td></tr>
+            <tr><td><strong>Refresh</strong></td><td>Làm mới</td><td>Cập nhật Pivot Table khi dữ liệu nguồn thay đổi</td></tr>
+            <tr><td><strong>Grand Total</strong></td><td>Tổng cộng</td><td>Hàng/cột tổng ở cuối Pivot Table</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 1.6 Bài tập -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 1.6 Bài tập thực hành</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 1.1 – Chuẩn bị dữ liệu bán hàng</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo file Excel mới, đặt tên <strong>"DuLieuBanHang.xlsx"</strong></li>
+                <li>Tạo bảng dữ liệu với các cột: <strong>MaDH, NgayBan, KhuVuc, NhanVien, SanPham, SoLuong, DonGia, ThanhTien</strong></li>
+                <li>Nhập ít nhất <strong>20 dòng</strong> dữ liệu mẫu (3 khu vực, 5 sản phẩm, 4 nhân viên)</li>
+                <li>Chuyển dữ liệu thành <strong>Table</strong> (<kbd>Ctrl + T</kbd>), đặt tên <code>tblBanHang</code></li>
+                <li>Kiểm tra: không có ô trống, không merge cells, cột ThanhTien = SoLuong × DonGia</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Dữ liệu mẫu tham khảo:</h4>
+              <table class="excel-table">
+                <thead><tr><th>MaDH</th><th>NgayBan</th><th>KhuVuc</th><th>NhanVien</th><th>SanPham</th><th>SoLuong</th><th>DonGia</th><th>ThanhTien</th></tr></thead>
+                <tbody>
+                  <tr><td>DH001</td><td>05/01/2024</td><td>Bắc</td><td>Nguyễn A</td><td>Laptop</td><td class="number">2</td><td class="number">15,000,000</td><td class="number">30,000,000</td></tr>
+                  <tr><td>DH002</td><td>08/01/2024</td><td>Nam</td><td>Trần B</td><td>Điện thoại</td><td class="number">5</td><td class="number">8,000,000</td><td class="number">40,000,000</td></tr>
+                  <tr><td>DH003</td><td>12/01/2024</td><td>Trung</td><td>Lê C</td><td>Tablet</td><td class="number">3</td><td class="number">10,000,000</td><td class="number">30,000,000</td></tr>
+                  <tr><td>DH004</td><td>15/01/2024</td><td>Bắc</td><td>Phạm D</td><td>Tai nghe</td><td class="number">10</td><td class="number">500,000</td><td class="number">5,000,000</td></tr>
+                  <tr><td>DH005</td><td>20/01/2024</td><td>Nam</td><td>Nguyễn A</td><td>Chuột</td><td class="number">15</td><td class="number">300,000</td><td class="number">4,500,000</td></tr>
+                </tbody>
+              </table>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo file Excel → Nhập header ở hàng 1</p></div></div>
+                <div class="step"><div class="step-content"><p>Nhập dữ liệu từ hàng 2 trở đi (tối thiểu 20 dòng)</p></div></div>
+                <div class="step"><div class="step-content"><p>Cột ThanhTien: nhập công thức <code>=[@SoLuong]*[@DonGia]</code></p></div></div>
+                <div class="step"><div class="step-content"><p>Chọn bất kỳ ô nào → <kbd>Ctrl + T</kbd> → OK</p></div></div>
+                <div class="step"><div class="step-content"><p>Vào <strong>Table Design</strong> → đổi Table Name thành <code>tblBanHang</code></p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 1.2 – Nhận diện dữ liệu sai</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong> Xem bảng dữ liệu sau và chỉ ra <strong>tất cả các lỗi</strong> khiến Pivot Table không hoạt động đúng:</p>
+              <table class="excel-table">
+                <thead><tr><th>Sản phẩm</th><th>Tháng 1</th><th>Tháng 2</th><th>Tháng 3</th></tr></thead>
+                <tbody>
+                  <tr><td>TV Samsung</td><td>50</td><td>60</td><td></td></tr>
+                  <tr><td>TV Samsung</td><td colspan="3" style="text-align:center;color:var(--accent-orange)">← Merged cells</td></tr>
+                  <tr><td>Tủ lạnh</td><td>30</td><td>Không có</td><td>45</td></tr>
+                  <tr><td colspan="1"><strong>Tổng</strong></td><td>80</td><td>60</td><td>45</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans2')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans2">
+              <h4>✅ Các lỗi tìm thấy:</h4>
+              <ol>
+                <li><strong>Dạng crosstab:</strong> Tháng 1, 2, 3 nên là giá trị trong cột "Tháng", không phải tên cột</li>
+                <li><strong>Merged cells:</strong> Hàng 3 có ô gộp → Pivot Table không đọc được</li>
+                <li><strong>Ô trống:</strong> Tháng 3 của TV Samsung bị trống → nên điền 0</li>
+                <li><strong>Dữ liệu không nhất quán:</strong> "Không có" trong cột số → nên là 0</li>
+                <li><strong>Hàng tổng:</strong> Hàng cuối là tổng → Pivot Table sẽ tính tổng sai</li>
+                <li><strong>TV Samsung trùng lặp:</strong> 2 hàng cùng tên nhưng 1 hàng bị merge</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes Section -->
+      <section class="notes-section" id="notes-section" data-page="chuong1">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="index.html"><small>← Quay lại</small> Trang chủ</a>
+        <a href="chuong2.html"><small>Chương tiếp →</small> Tạo Pivot Table đầu tiên</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

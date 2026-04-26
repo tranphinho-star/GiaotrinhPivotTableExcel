@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 5: Tính toán nâng cao - Calculated Field, Show Values As, Value Field Settings">
+  <title>Chương 5: Tính toán nâng cao</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html" class="active"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 05</div>
+        <h1>Tính toán nâng cao</h1>
+        <p>Khám phá sức mạnh tính toán của Pivot Table: Value Field Settings, Show Values As, Calculated Field và Calculated Item.</p>
+      </div>
+
+      <!-- 5.1 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📊</span> 5.1 Value Field Settings</h2>
+        <p>Mặc định, Pivot Table dùng <strong>Sum</strong> cho số và <strong>Count</strong> cho text. Bạn có thể thay đổi:</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Click chuột phải vào ô Values → <strong>Value Field Settings...</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn hàm tính toán mong muốn trong tab <strong>Summarize Values By</strong></p></div></div>
+        </div>
+
+        <div class="card">
+          <h3>📋 Các hàm tổng hợp (Summarize Values By)</h3>
+          <table class="styled-table">
+            <thead><tr><th>Hàm</th><th>Chức năng</th><th>Ví dụ thực tế</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Sum</strong></td><td>Tổng cộng</td><td>Tổng doanh thu, tổng chi phí</td></tr>
+              <tr><td><strong>Count</strong></td><td>Đếm số lượng</td><td>Số đơn hàng, số nhân viên</td></tr>
+              <tr><td><strong>Average</strong></td><td>Trung bình</td><td>Lương trung bình, giá TB</td></tr>
+              <tr><td><strong>Max</strong></td><td>Giá trị lớn nhất</td><td>Đơn hàng lớn nhất</td></tr>
+              <tr><td><strong>Min</strong></td><td>Giá trị nhỏ nhất</td><td>Giá thấp nhất</td></tr>
+              <tr><td><strong>Product</strong></td><td>Tích</td><td>Hệ số tổng hợp</td></tr>
+              <tr><td><strong>Count Numbers</strong></td><td>Đếm ô có số</td><td>Số ô có giá trị</td></tr>
+              <tr><td><strong>StdDev / Var</strong></td><td>Độ lệch chuẩn / Phương sai</td><td>Phân tích thống kê</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo:</strong> Bạn có thể kéo <strong>cùng 1 field nhiều lần</strong> vào Values, mỗi lần chọn hàm khác nhau. Ví dụ: Sum of ThanhTien + Average of ThanhTien + Count of ThanhTien cùng lúc.</div>
+        </div>
+      </section>
+
+      <!-- 5.2 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📈</span> 5.2 Show Values As</h2>
+        <p>Đây là tính năng mạnh nhất của Pivot Table — biến đổi giá trị thành <strong>tỷ lệ phần trăm, xếp hạng, tích lũy...</strong></p>
+
+        <div class="card">
+          <h3>📊 Các tùy chọn Show Values As</h3>
+          <table class="styled-table">
+            <thead><tr><th>Tùy chọn</th><th>Giải thích</th><th>Kết quả</th></tr></thead>
+            <tbody>
+              <tr><td><strong>% of Grand Total</strong></td><td>Phần trăm trên tổng cộng</td><td>Laptop = 30.3%</td></tr>
+              <tr><td><strong>% of Column Total</strong></td><td>Phần trăm trên tổng cột</td><td>Laptop/Bắc = 90%</td></tr>
+              <tr><td><strong>% of Row Total</strong></td><td>Phần trăm trên tổng hàng</td><td>Laptop ở Bắc = 100%</td></tr>
+              <tr><td><strong>% of Parent Total</strong></td><td>Phần trăm trên nhóm cha</td><td>Nhân viên/PhongBan</td></tr>
+              <tr><td><strong>Running Total</strong></td><td>Tổng tích lũy</td><td>Doanh thu lũy kế theo tháng</td></tr>
+              <tr><td><strong>Rank Smallest/Largest</strong></td><td>Xếp hạng</td><td>Sản phẩm bán chạy #1, #2...</td></tr>
+              <tr><td><strong>Difference From</strong></td><td>Chênh lệch so với mốc</td><td>So với tháng trước</td></tr>
+              <tr><td><strong>% Difference From</strong></td><td>% chênh lệch</td><td>Tăng trưởng % so với kỳ trước</td></tr>
+              <tr><td><strong>Index</strong></td><td>Chỉ số tương đối</td><td>Phân tích xu hướng</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Ví dụ: % of Grand Total</h3>
+        <table class="excel-table">
+          <thead><tr><th>SanPham</th><th>Sum of ThanhTien</th><th>% of Grand Total</th></tr></thead>
+          <tbody>
+            <tr><td>Điện thoại</td><td class="number">64,000,000</td><td class="number highlight">43.1%</td></tr>
+            <tr><td>Laptop</td><td class="number">45,000,000</td><td class="number highlight">30.3%</td></tr>
+            <tr><td>Tablet</td><td class="number">30,000,000</td><td class="number highlight">20.2%</td></tr>
+            <tr><td>Tai nghe</td><td class="number">5,000,000</td><td class="number">3.4%</td></tr>
+            <tr><td>Chuột</td><td class="number">4,500,000</td><td class="number">3.0%</td></tr>
+            <tr><td><strong>Grand Total</strong></td><td class="number"><strong>148,500,000</strong></td><td class="number"><strong>100.0%</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Kéo <strong>ThanhTien</strong> vào Values <strong>2 lần</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Click phải lần thứ 2 → <strong>Value Field Settings</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Chuyển sang tab <strong>Show Values As</strong> → chọn <strong>% of Grand Total</strong></p></div></div>
+        </div>
+      </section>
+
+      <!-- 5.3 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔧</span> 5.3 Calculated Field</h2>
+        <p><strong>Calculated Field</strong> cho phép tạo field mới bằng công thức từ các field hiện có, <strong>trực tiếp trong Pivot Table</strong>.</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Click vào Pivot Table → tab <strong>PivotTable Analyze</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Click <strong>Fields, Items & Sets</strong> → <strong>Calculated Field...</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Đặt tên field (ví dụ: <strong>LoiNhuan</strong>)</p></div></div>
+          <div class="step"><div class="step-content"><p>Nhập công thức: <code>= ThanhTien - GiaVon</code></p></div></div>
+          <div class="step"><div class="step-content"><p>Nhấn <strong>Add</strong> → <strong>OK</strong></p></div></div>
+        </div>
+
+        <div class="card">
+          <h3>📊 Ví dụ thực tế: Lợi nhuận biên</h3>
+          <p>Giả sử bạn có thêm cột <strong>GiaVon</strong> trong dữ liệu nguồn:</p>
+          <table class="styled-table">
+            <thead><tr><th>Calculated Field</th><th>Công thức</th><th>Ý nghĩa</th></tr></thead>
+            <tbody>
+              <tr><td>LoiNhuan</td><td><code>= ThanhTien - GiaVon</code></td><td>Lợi nhuận gộp</td></tr>
+              <tr><td>TyLeLN</td><td><code>= LoiNhuan / ThanhTien</code></td><td>Tỷ lệ lợi nhuận %</td></tr>
+              <tr><td>LoiNhuanMoiSP</td><td><code>= LoiNhuan / SoLuong</code></td><td>Lợi nhuận trên mỗi sản phẩm</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box warning">
+          <span class="box-icon">⚠️</span>
+          <div><strong>Hạn chế:</strong> Calculated Field tính trên <strong>tổng các field</strong>, không phải từng dòng. Ví dụ: <code>= ThanhTien / SoLuong</code> sẽ là <code>Sum(ThanhTien) / Sum(SoLuong)</code>, có thể không chính xác. Dùng <strong>Power Pivot</strong> (Chương 8) nếu cần tính toán phức tạp hơn.</div>
+        </div>
+      </section>
+
+      <!-- 5.4 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 5.4 Bài tập thực hành</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 5.1 – Phân tích tỷ lệ doanh thu</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo Pivot Table: Rows = SanPham, Values = Sum of ThanhTien</li>
+                <li>Thêm ThanhTien vào Values lần 2 → đổi thành <strong>% of Grand Total</strong></li>
+                <li>Thêm ThanhTien vào Values lần 3 → đổi thành <strong>Rank Largest to Smallest</strong></li>
+                <li>Format: giá trị tiền <code>#,##0</code>, % là <code>0.0%</code></li>
+                <li>Sản phẩm nào chiếm tỷ lệ doanh thu cao nhất?</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Kết quả mong đợi:</h4>
+              <table class="excel-table">
+                <thead><tr><th>SanPham</th><th>Doanh thu</th><th>Tỷ lệ</th><th>Hạng</th></tr></thead>
+                <tbody>
+                  <tr><td>Điện thoại</td><td class="number">64,000,000</td><td class="number highlight">43.1%</td><td class="number highlight">1</td></tr>
+                  <tr><td>Laptop</td><td class="number">45,000,000</td><td class="number">30.3%</td><td class="number">2</td></tr>
+                  <tr><td>Tablet</td><td class="number">30,000,000</td><td class="number">20.2%</td><td class="number">3</td></tr>
+                  <tr><td>Tai nghe</td><td class="number">5,000,000</td><td class="number">3.4%</td><td class="number">4</td></tr>
+                  <tr><td>Chuột</td><td class="number">4,500,000</td><td class="number">3.0%</td><td class="number">5</td></tr>
+                </tbody>
+              </table>
+              <p><strong>Kết luận:</strong> Điện thoại chiếm 43.1% doanh thu, xếp hạng #1.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 5.2 – Calculated Field: Lợi nhuận</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Thêm cột <strong>GiaVon</strong> vào bảng dữ liệu (= SoLuong × đơn giá vốn)</li>
+                <li>Tạo Calculated Field: <code>LoiNhuan = ThanhTien - GiaVon</code></li>
+                <li>Tạo Calculated Field: <code>TyLeLoiNhuan = LoiNhuan / ThanhTien</code></li>
+                <li>Hiển thị cả 3: Sum of ThanhTien, Sum of LoiNhuan, TyLeLoiNhuan</li>
+                <li>Sản phẩm nào có tỷ lệ lợi nhuận cao nhất?</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans2')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans2">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Thêm cột GiaVon vào Table nguồn (ước tính 60-80% ThanhTien)</p></div></div>
+                <div class="step"><div class="step-content"><p>Refresh Pivot Table (<kbd>Alt + F5</kbd>)</p></div></div>
+                <div class="step"><div class="step-content"><p>PivotTable Analyze → Fields, Items & Sets → Calculated Field</p></div></div>
+                <div class="step"><div class="step-content"><p>Tên: <strong>LoiNhuan</strong>, Công thức: <code>= ThanhTien - GiaVon</code> → Add</p></div></div>
+                <div class="step"><div class="step-content"><p>Tên: <strong>TyLeLoiNhuan</strong>, Công thức: <code>= LoiNhuan / ThanhTien</code> → Add → OK</p></div></div>
+                <div class="step"><div class="step-content"><p>Format TyLeLoiNhuan: Number Format → Percentage → 1 decimal</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong5">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong4.html"><small>← Chương trước</small> Định dạng & Tùy chỉnh</a>
+        <a href="chuong6.html"><small>Chương tiếp →</small> Lọc & Slicer</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

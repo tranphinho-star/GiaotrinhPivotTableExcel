@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 7: Pivot Chart - Tạo biểu đồ từ Pivot Table, các loại chart phù hợp">
+  <title>Chương 7: Pivot Chart</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html" class="active"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 07</div>
+        <h1>Pivot Chart</h1>
+        <p>Biến Pivot Table thành biểu đồ trực quan. Tìm hiểu các loại chart phù hợp, cách tùy chỉnh và kết hợp với Slicer.</p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📊</span> 7.1 Tạo Pivot Chart</h2>
+        <p><strong>Pivot Chart</strong> là biểu đồ liên kết trực tiếp với Pivot Table. Khi PT thay đổi, chart tự cập nhật.</p>
+
+        <h3>Cách 1: Từ Pivot Table có sẵn</h3>
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Click vào Pivot Table → tab <strong>PivotTable Analyze</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Click <strong>PivotChart</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn loại chart (Column, Bar, Line, Pie...) → OK</p></div></div>
+        </div>
+
+        <h3>Cách 2: Tạo PivotChart trực tiếp</h3>
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Chọn dữ liệu nguồn → tab <strong>Insert</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Click <strong>PivotChart</strong> (trong nhóm Charts)</p></div></div>
+          <div class="step"><div class="step-content"><p>Excel tạo cả Pivot Table + Pivot Chart cùng lúc</p></div></div>
+        </div>
+
+        <div class="info-box note">
+          <span class="box-icon">📌</span>
+          <div><strong>Ghi nhớ:</strong> Pivot Chart luôn đi kèm 1 Pivot Table. Xóa PT → chart cũng bị xóa. Lọc trên PT → chart tự lọc theo.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📋</span> 7.2 Chọn loại Chart phù hợp</h2>
+
+        <div class="card">
+          <h3>📊 Hướng dẫn chọn Chart</h3>
+          <table class="styled-table">
+            <thead><tr><th>Mục đích</th><th>Loại Chart</th><th>Ví dụ</th></tr></thead>
+            <tbody>
+              <tr><td>So sánh giá trị</td><td><strong>Column / Bar</strong></td><td>Doanh thu theo sản phẩm</td></tr>
+              <tr><td>Tỷ lệ phần trăm</td><td><strong>Pie / Doughnut</strong></td><td>% doanh thu mỗi khu vực</td></tr>
+              <tr><td>Xu hướng theo thời gian</td><td><strong>Line / Area</strong></td><td>Doanh thu theo tháng</td></tr>
+              <tr><td>So sánh + xu hướng</td><td><strong>Combo (Column + Line)</strong></td><td>Doanh thu (cột) + tỷ lệ tăng trưởng (đường)</td></tr>
+              <tr><td>Phân tán / tương quan</td><td><strong>Scatter</strong></td><td>Số lượng vs Doanh thu</td></tr>
+              <tr><td>So sánh nhiều nhóm</td><td><strong>Stacked Column/Bar</strong></td><td>Doanh thu theo vùng, chia theo sản phẩm</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Nguyên tắc vàng:</strong> 1 chart chỉ nên truyền tải <strong>1 thông điệp</strong>. Không nhồi nhét quá nhiều dữ liệu vào 1 biểu đồ.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎨</span> 7.3 Tùy chỉnh Pivot Chart</h2>
+
+        <div class="card">
+          <h3>🔧 Các tùy chỉnh quan trọng</h3>
+          <ul>
+            <li><strong>Chart Title:</strong> Click tiêu đề → gõ tên descriptive (ví dụ: "Doanh thu Q1/2024 theo sản phẩm")</li>
+            <li><strong>Data Labels:</strong> Hiển thị giá trị trên cột/điểm → Chart Design → Add Chart Element → Data Labels</li>
+            <li><strong>Legend:</strong> Chú thích → có thể đặt Top, Bottom, Left, Right</li>
+            <li><strong>Axis:</strong> Đổi min/max, format số, ẩn trục → Click phải vào trục → Format Axis</li>
+            <li><strong>Colors:</strong> Click phải vào chuỗi → Format Data Series → Fill → chọn màu</li>
+            <li><strong>Chart Styles:</strong> Tab Design → Chart Styles → chọn style có sẵn</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🔲 Ẩn Field Buttons</h3>
+          <p>Pivot Chart mặc định hiện các dropdown button trên chart. Để ẩn:</p>
+          <ul>
+            <li>Tab <strong>PivotChart Analyze</strong> → <strong>Field Buttons</strong> → chọn <strong>Hide All</strong></li>
+            <li>Hoặc click phải vào button → <strong>Hide All Field Buttons on Chart</strong></li>
+          </ul>
+          <p>→ Chart sẽ sạch sẽ hơn, phù hợp trình bày và Dashboard.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔗</span> 7.4 Kết hợp Pivot Chart + Slicer</h2>
+        <p>Khi Slicer kết nối với Pivot Table, Pivot Chart tự động cập nhật theo: </p>
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Tạo Pivot Table + Pivot Chart</p></div></div>
+          <div class="step"><div class="step-content"><p>Insert Slicer (từ Chương 6)</p></div></div>
+          <div class="step"><div class="step-content"><p>Click nút trên Slicer → Chart thay đổi ngay lập tức</p></div></div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo Dashboard:</strong> Ẩn Pivot Table (thu nhỏ hàng), chỉ hiện Pivot Chart + Slicer. Giám đốc click Slicer → chart thay đổi → trải nghiệm như BI tool!</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 7.5 Bài tập thực hành</h2>
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 7.1 – Biểu đồ doanh thu theo sản phẩm</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo Pivot Table: Rows = SanPham, Values = Sum of ThanhTien</li>
+                <li>Sort doanh thu từ cao → thấp</li>
+                <li>Tạo <strong>Pivot Chart dạng Bar</strong> (thanh ngang)</li>
+                <li>Thêm <strong>Data Labels</strong> hiển thị giá trị</li>
+                <li>Đổi title thành "Top Sản phẩm theo Doanh thu"</li>
+                <li>Ẩn Field Buttons</li>
+                <li>Thêm Slicer KhuVuc → test lọc</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo PT → Sort → PivotTable Analyze → PivotChart → chọn <strong>Bar</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Click chart → Chart Design → Add Chart Element → Data Labels → <strong>Outside End</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Click title → gõ "Top Sản phẩm theo Doanh thu"</p></div></div>
+                <div class="step"><div class="step-content"><p>PivotChart Analyze → Field Buttons → <strong>Hide All</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>PivotTable Analyze → Insert Slicer → tick KhuVuc → OK</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 7.2 – Biểu đồ xu hướng doanh thu theo tháng</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo PT: Rows = NgayBan (group theo Month), Values = Sum of ThanhTien</li>
+                <li>Tạo Pivot Chart dạng <strong>Line with Markers</strong></li>
+                <li>Thêm Data Labels + tùy chỉnh màu đường xanh lá</li>
+                <li>Thêm trendline (click phải vào đường → Add Trendline → Linear)</li>
+                <li>Trả lời: Xu hướng doanh thu tăng hay giảm?</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans2')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans2">
+              <h4>✅ Hướng dẫn:</h4>
+              <p>Group NgayBan theo Months → Insert PivotChart → Line with Markers. Trendline cho thấy xu hướng chung (tăng/giảm). Đường trendline đi lên = doanh thu tăng.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong7">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong6.html"><small>← Chương trước</small> Lọc & Slicer</a>
+        <a href="chuong8.html"><small>Chương tiếp →</small> Power Pivot</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

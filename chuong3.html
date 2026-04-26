@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 3: Cấu trúc & Vùng kéo thả - Rows, Columns, Values, Filters">
+  <title>Chương 3: Cấu trúc & Vùng kéo thả</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">PT</div>
+        <h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2>
+      </div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a>
+        <div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html" class="active"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 03</div>
+        <h1>Cấu trúc & Vùng kéo thả</h1>
+        <p>Hiểu sâu về 4 vùng Rows, Columns, Values, Filters và cách kết hợp chúng để tạo báo cáo đa chiều.</p>
+      </div>
+
+      <!-- 3.1 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🧩</span> 3.1 Bốn vùng của Pivot Table</h2>
+        <p>Mỗi Pivot Table được xây dựng từ 4 vùng. Hiểu rõ vai trò từng vùng là chìa khóa để tạo báo cáo chính xác.</p>
+
+        <div class="card">
+          <h3>📐 Rows (Hàng)</h3>
+          <p>Field kéo vào Rows sẽ tạo ra <strong>nhãn hàng</strong> ở cột đầu tiên của Pivot Table. Mỗi giá trị duy nhất tạo một hàng riêng.</p>
+          <p><strong>Ví dụ:</strong> Kéo "SanPham" vào Rows → mỗi sản phẩm hiện thành 1 hàng: Laptop, Điện thoại, Tablet...</p>
+        </div>
+
+        <div class="card">
+          <h3>📏 Columns (Cột)</h3>
+          <p>Field kéo vào Columns sẽ tạo ra <strong>tiêu đề cột</strong>. Phù hợp cho so sánh theo chiều ngang.</p>
+          <p><strong>Ví dụ:</strong> Kéo "KhuVuc" vào Columns → tạo các cột Bắc, Trung, Nam</p>
+        </div>
+
+        <div class="card">
+          <h3>📊 Values (Giá trị)</h3>
+          <p>Field kéo vào Values sẽ được <strong>tính toán</strong> (Sum, Count, Average...). Đây là "số liệu" chính của báo cáo.</p>
+          <p><strong>Ví dụ:</strong> Kéo "ThanhTien" vào Values → tự động tính Sum (tổng) cho mỗi ô</p>
+        </div>
+
+        <div class="card">
+          <h3>🔲 Filters (Bộ lọc)</h3>
+          <p>Field kéo vào Filters tạo ra <strong>dropdown lọc</strong> phía trên Pivot Table. Lọc toàn bộ PT theo điều kiện.</p>
+          <p><strong>Ví dụ:</strong> Kéo "NhanVien" vào Filters → có thể chọn xem dữ liệu của 1 nhân viên cụ thể</p>
+        </div>
+      </section>
+
+      <!-- 3.2 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📊</span> 3.2 Ví dụ: Doanh thu theo Vùng & Sản phẩm</h2>
+        <p>Kéo thả để tạo báo cáo <strong>crosstab</strong> (bảng tổng hợp 2 chiều):</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Kéo <strong>SanPham</strong> → <strong>Rows</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Kéo <strong>KhuVuc</strong> → <strong>Columns</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Kéo <strong>ThanhTien</strong> → <strong>Values</strong></p></div></div>
+        </div>
+
+        <h3>Kết quả:</h3>
+        <table class="excel-table">
+          <thead><tr><th>SanPham ↓ \ KhuVuc →</th><th>Bắc</th><th>Nam</th><th>Trung</th><th>Grand Total</th></tr></thead>
+          <tbody>
+            <tr><td>Chuột</td><td class="number">—</td><td class="number">4,500,000</td><td class="number">—</td><td class="number">4,500,000</td></tr>
+            <tr><td>Điện thoại</td><td class="number">—</td><td class="number highlight">64,000,000</td><td class="number">—</td><td class="number">64,000,000</td></tr>
+            <tr><td>Laptop</td><td class="number highlight">45,000,000</td><td class="number">—</td><td class="number">—</td><td class="number">45,000,000</td></tr>
+            <tr><td>Tablet</td><td class="number">—</td><td class="number">—</td><td class="number">30,000,000</td><td class="number">30,000,000</td></tr>
+            <tr><td>Tai nghe</td><td class="number">5,000,000</td><td class="number">—</td><td class="number">—</td><td class="number">5,000,000</td></tr>
+            <tr><td><strong>Grand Total</strong></td><td class="number"><strong>50,000,000</strong></td><td class="number"><strong>68,500,000</strong></td><td class="number"><strong>30,000,000</strong></td><td class="number"><strong>148,500,000</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Đọc bảng:</strong> Nhìn nhanh thấy: khu vực Nam có doanh thu cao nhất (68.5 triệu), chủ yếu từ Điện thoại. Khu vực Bắc bán nhiều Laptop.</div>
+        </div>
+      </section>
+
+      <!-- 3.3 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📚</span> 3.3 Nhiều Fields trong cùng vùng</h2>
+        <p>Bạn có thể kéo <strong>nhiều field</strong> vào cùng một vùng để tạo báo cáo phân cấp:</p>
+
+        <div class="card">
+          <h3>📐 Ví dụ: 2 fields trong Rows</h3>
+          <p>Kéo <strong>KhuVuc</strong> rồi <strong>NhanVien</strong> vào Rows:</p>
+          <table class="excel-table">
+            <thead><tr><th>Row Labels</th><th>Sum of ThanhTien</th></tr></thead>
+            <tbody>
+              <tr><td><strong>▼ Bắc</strong></td><td class="number"><strong>50,000,000</strong></td></tr>
+              <tr><td>&nbsp;&nbsp;&nbsp;Nguyễn A</td><td class="number">30,000,000</td></tr>
+              <tr><td>&nbsp;&nbsp;&nbsp;Phạm D</td><td class="number">20,000,000</td></tr>
+              <tr><td><strong>▼ Nam</strong></td><td class="number"><strong>68,500,000</strong></td></tr>
+              <tr><td>&nbsp;&nbsp;&nbsp;Trần B</td><td class="number">44,500,000</td></tr>
+              <tr><td>&nbsp;&nbsp;&nbsp;Nguyễn A</td><td class="number">24,000,000</td></tr>
+              <tr><td><strong>▼ Trung</strong></td><td class="number"><strong>30,000,000</strong></td></tr>
+              <tr><td>&nbsp;&nbsp;&nbsp;Lê C</td><td class="number">30,000,000</td></tr>
+            </tbody>
+          </table>
+          <p>Field đầu (KhuVuc) là nhóm chính, field sau (NhanVien) là chi tiết bên trong.</p>
+        </div>
+
+        <div class="card">
+          <h3>📊 Ví dụ: 2 fields trong Values</h3>
+          <p>Kéo cả <strong>ThanhTien</strong> và <strong>SoLuong</strong> vào Values:</p>
+          <p>Excel tự thêm field ảo <strong>"Σ Values"</strong> — bạn có thể kéo field này vào Rows hoặc Columns để thay đổi cách hiển thị.</p>
+        </div>
+
+        <div class="info-box warning">
+          <span class="box-icon">⚠️</span>
+          <div><strong>Lưu ý:</strong> Không nên kéo quá nhiều field vào Columns (tối đa 1-2), vì bảng sẽ quá rộng và khó đọc. Dùng Rows cho nhiều field hơn.</div>
+        </div>
+      </section>
+
+      <!-- 3.4 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📅</span> 3.4 Group dữ liệu ngày tháng</h2>
+        <p>Khi kéo field ngày vào Rows/Columns, Excel thường tự động group theo <strong>Tháng, Quý, Năm</strong>:</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Kéo <strong>NgayBan</strong> vào Rows → Excel có thể tự group</p></div></div>
+          <div class="step"><div class="step-content"><p>Nếu chưa group: Click phải vào ngày → <strong>Group...</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn cấp độ: <strong>Months</strong>, <strong>Quarters</strong>, <strong>Years</strong> (có thể chọn nhiều)</p></div></div>
+        </div>
+
+        <h3>Ví dụ group theo Quý:</h3>
+        <table class="excel-table">
+          <thead><tr><th>Quý</th><th>Sum of ThanhTien</th></tr></thead>
+          <tbody>
+            <tr><td>Qtr1</td><td class="number highlight">109,500,000</td></tr>
+            <tr><td>Qtr2</td><td class="number">39,000,000</td></tr>
+            <tr><td><strong>Grand Total</strong></td><td class="number"><strong>148,500,000</strong></td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo:</strong> Để <strong>ungroup</strong>, click phải vào group → <strong>Ungroup</strong>. Để group theo <strong>tuần</strong>, chọn "Days" với "Number of days" = 7.</div>
+        </div>
+      </section>
+
+      <!-- 3.5 Bài tập -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 3.5 Bài tập thực hành</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 3.1 – Báo cáo crosstab</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong> Từ dữ liệu bán hàng, tạo Pivot Table với:</p>
+              <ol>
+                <li><strong>Rows:</strong> NhanVien</li>
+                <li><strong>Columns:</strong> SanPham</li>
+                <li><strong>Values:</strong> Sum of ThanhTien</li>
+                <li><strong>Filters:</strong> KhuVuc</li>
+                <li>Dùng Filter để xem doanh thu của riêng khu vực <strong>Bắc</strong></li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Kết quả khi lọc KhuVuc = "Bắc":</h4>
+              <p>Chỉ hiển thị doanh thu của nhân viên ở khu vực Bắc, phân theo sản phẩm. Các ô trống nghĩa là nhân viên đó không bán sản phẩm tương ứng ở khu vực Bắc.</p>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo PT mới → Kéo NhanVien → Rows</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo SanPham → Columns</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo ThanhTien → Values</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo KhuVuc → Filters</p></div></div>
+                <div class="step"><div class="step-content"><p>Click dropdown KhuVuc ở đầu trang → chọn "Bắc" → OK</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 3.2 – Group theo thời gian</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo Pivot Table với <strong>NgayBan</strong> ở Rows, <strong>ThanhTien</strong> ở Values</li>
+                <li>Group NgayBan theo <strong>Tháng</strong> và <strong>Quý</strong></li>
+                <li>Thêm <strong>KhuVuc</strong> vào Columns</li>
+                <li>Trả lời: Tháng nào khu vực nào có doanh thu cao nhất?</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans2')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans2">
+              <h4>✅ Hướng dẫn Group:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo PT → Kéo NgayBan vào Rows, ThanhTien vào Values</p></div></div>
+                <div class="step"><div class="step-content"><p>Click phải vào bất kỳ ngày nào → <strong>Group...</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Chọn <strong>Months</strong> + <strong>Quarters</strong> → OK</p></div></div>
+                <div class="step"><div class="step-content"><p>Kéo KhuVuc vào Columns → xem kết quả crosstab theo quý/tháng × khu vực</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong3">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong2.html"><small>← Chương trước</small> Tạo PT đầu tiên</a>
+        <a href="chuong4.html"><small>Chương tiếp →</small> Định dạng & Tùy chỉnh</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

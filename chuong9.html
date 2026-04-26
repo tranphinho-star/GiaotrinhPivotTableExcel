@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 9: Power Query kết hợp Pivot Table - ETL, Get & Transform Data, merge nhiều nguồn">
+  <title>Chương 9: Power Query kết hợp Pivot Table</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html" class="active"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 09</div>
+        <h1>Power Query kết hợp Pivot Table</h1>
+        <p>Tự động hóa việc thu thập, làm sạch và kết hợp dữ liệu từ nhiều nguồn trước khi tạo Pivot Table.</p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔄</span> 9.1 Power Query là gì?</h2>
+        <p><strong>Power Query</strong> (còn gọi là "Get & Transform") là công cụ ETL (Extract, Transform, Load) tích hợp sẵn trong Excel 2016+.</p>
+
+        <div class="card">
+          <h3>📊 Quy trình ETL</h3>
+          <table class="styled-table">
+            <thead><tr><th>Bước</th><th>Tên</th><th>Hoạt động</th></tr></thead>
+            <tbody>
+              <tr><td><strong>E</strong></td><td>Extract (Trích xuất)</td><td>Lấy dữ liệu từ CSV, Excel, Web, Database, API...</td></tr>
+              <tr><td><strong>T</strong></td><td>Transform (Biến đổi)</td><td>Lọc, đổi kiểu dữ liệu, tách/gộp cột, pivot/unpivot...</td></tr>
+              <tr><td><strong>L</strong></td><td>Load (Nạp)</td><td>Đưa vào Excel Table hoặc Data Model → sẵn sàng cho Pivot Table</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Sức mạnh của Power Query:</strong> Sau khi thiết lập 1 lần, chỉ cần nhấn <strong>Refresh</strong> → Power Query tự động lấy dữ liệu mới, làm sạch, và cập nhật Pivot Table. Tiết kiệm hàng giờ công việc!</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📥</span> 9.2 Import dữ liệu</h2>
+        <p>Power Query hỗ trợ import dữ liệu từ hầu hết mọi nguồn:</p>
+
+        <div class="card">
+          <h3>📋 Các nguồn dữ liệu phổ biến</h3>
+          <table class="styled-table">
+            <thead><tr><th>Nguồn</th><th>Cách mở</th><th>Ứng dụng</th></tr></thead>
+            <tbody>
+              <tr><td>File CSV/Text</td><td>Data → From Text/CSV</td><td>Export từ ERP, POS, hệ thống cũ</td></tr>
+              <tr><td>File Excel khác</td><td>Data → From Workbook</td><td>Tổng hợp báo cáo chi nhánh</td></tr>
+              <tr><td>Folder</td><td>Data → From Folder</td><td>Gộp nhiều file cùng cấu trúc</td></tr>
+              <tr><td>Web</td><td>Data → From Web</td><td>Crawl bảng giá, tỷ giá...</td></tr>
+              <tr><td>SQL Server</td><td>Data → From SQL Server</td><td>Kết nối database trực tiếp</td></tr>
+              <tr><td>Bảng trong file</td><td>Data → From Table/Range</td><td>Biến đổi dữ liệu đã có</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Vào tab <strong>Data</strong> → nhóm <strong>Get & Transform Data</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn nguồn dữ liệu phù hợp</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Power Query Editor</strong> mở ra → dữ liệu được preview</p></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔧</span> 9.3 Các thao tác Transform phổ biến</h2>
+
+        <div class="card">
+          <h3>📋 Thao tác Transform hay dùng</h3>
+          <table class="styled-table">
+            <thead><tr><th>Thao tác</th><th>Cách làm</th><th>Ví dụ</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Đổi kiểu dữ liệu</strong></td><td>Click icon kiểu → chọn kiểu mới</td><td>Text → Date, Text → Number</td></tr>
+              <tr><td><strong>Xóa cột</strong></td><td>Click phải cột → Remove Columns</td><td>Xóa cột không cần thiết</td></tr>
+              <tr><td><strong>Lọc dòng</strong></td><td>Click mũi tên ▼ trên header</td><td>Lọc bỏ dòng trống, dòng lỗi</td></tr>
+              <tr><td><strong>Tách cột</strong></td><td>Transform → Split Column</td><td>Tách "Họ Tên" thành "Họ" + "Tên"</td></tr>
+              <tr><td><strong>Gộp cột</strong></td><td>Chọn nhiều cột → Merge Columns</td><td>Gộp "Ngày" + "Tháng" + "Năm"</td></tr>
+              <tr><td><strong>Replace Values</strong></td><td>Click phải → Replace Values</td><td>Thay "N/A" thành 0</td></tr>
+              <tr><td><strong>Unpivot</strong></td><td>Chọn cột → Transform → Unpivot</td><td>Chuyển T1,T2,T3 thành 1 cột "Tháng"</td></tr>
+              <tr><td><strong>Group By</strong></td><td>Transform → Group By</td><td>Tổng doanh thu theo nhóm</td></tr>
+              <tr><td><strong>Thêm cột tính toán</strong></td><td>Add Column → Custom Column</td><td>ThanhTien = SoLuong × DonGia</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box note">
+          <span class="box-icon">📌</span>
+          <div><strong>Applied Steps:</strong> Mọi thao tác bạn làm trong Power Query Editor đều được ghi lại ở panel <strong>Applied Steps</strong> bên phải. Bạn có thể xóa, sửa, hoặc thêm bước bất kỳ lúc nào.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📁</span> 9.4 Gộp nhiều file từ Folder</h2>
+        <p>Tình huống phổ biến: bạn có <strong>12 file báo cáo tháng</strong> (cùng cấu trúc) cần gộp lại:</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Đặt tất cả file vào <strong>1 folder</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Data → <strong>From Folder</strong> → chọn folder → OK</p></div></div>
+          <div class="step"><div class="step-content"><p>Click <strong>Combine & Transform Data</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn sheet/table trong mỗi file → OK</p></div></div>
+          <div class="step"><div class="step-content"><p>Power Query tự gộp tất cả file + thêm cột <strong>Source.Name</strong> (tên file gốc)</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Close & Load</strong> → dữ liệu gộp sẵn sàng cho Pivot Table</p></div></div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Tự động hóa:</strong> Khi thêm file mới vào folder → chỉ cần <strong>Refresh All</strong> (<kbd>Ctrl + Alt + F5</kbd>) → Power Query tự phát hiện file mới và gộp vào!</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔗</span> 9.5 Merge & Append Queries</h2>
+
+        <div class="card">
+          <h3>🔗 Merge Queries (Nối ngang — giống VLOOKUP)</h3>
+          <p>Kết nối 2 bảng theo cột chung:</p>
+          <ul>
+            <li><strong>Home → Merge Queries</strong></li>
+            <li>Chọn bảng thứ 2 + cột khóa → chọn kiểu Join (Left, Inner, Full...)</li>
+            <li>Expand cột kết quả để lấy thông tin từ bảng 2</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>📋 Append Queries (Nối dọc — gộp dữ liệu)</h3>
+          <p>Xếp chồng dữ liệu từ nhiều bảng cùng cấu trúc:</p>
+          <ul>
+            <li><strong>Home → Append Queries</strong></li>
+            <li>Chọn "Two tables" hoặc "Three or more tables"</li>
+            <li>Kết quả: 1 bảng gộp tất cả dòng</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 9.6 Bài tập thực hành</h2>
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 9.1 – Import & Transform CSV</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Nhận file báo cáo bán hàng dạng CSV từ hệ thống POS. Dữ liệu lộn xộn, cần làm sạch.</p>
+              <ol>
+                <li>Tạo file CSV mẫu với 20 dòng (có ô trống, "N/A", ngày dạng text)</li>
+                <li>Import vào Excel bằng <strong>Power Query</strong> (Data → From Text/CSV)</li>
+                <li>Trong Power Query Editor:
+                  <ul>
+                    <li>Đổi kiểu cột ngày từ Text → Date</li>
+                    <li>Replace "N/A" thành "0" ở cột số</li>
+                    <li>Xóa dòng trống (Remove Rows → Remove Blank Rows)</li>
+                    <li>Thêm cột ThanhTien = SoLuong × DonGia</li>
+                  </ul>
+                </li>
+                <li><strong>Close & Load</strong> → Tạo Pivot Table từ kết quả</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Các bước trong Power Query Editor:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Data → From Text/CSV → chọn file → Load/Transform Data</p></div></div>
+                <div class="step"><div class="step-content"><p>Click icon kiểu cột NgayBan → đổi thành <strong>Date</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Click phải cột SoLuong → <strong>Replace Values</strong>: "N/A" → "0"</p></div></div>
+                <div class="step"><div class="step-content"><p>Đổi kiểu SoLuong sang <strong>Whole Number</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Home → <strong>Remove Rows → Remove Blank Rows</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Add Column → <strong>Custom Column</strong>: <code>= [SoLuong] * [DonGia]</code></p></div></div>
+                <div class="step"><div class="step-content"><p>Home → <strong>Close & Load</strong> → Insert → PivotTable</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong9">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong8.html"><small>← Chương trước</small> Power Pivot</a>
+        <a href="chuong10.html"><small>Chương tiếp →</small> Dashboard thực tế</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

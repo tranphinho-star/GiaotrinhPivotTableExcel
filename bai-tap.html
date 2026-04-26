@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bài tập tổng hợp Pivot Table - Từ cơ bản đến nâng cao, có lời giải chi tiết">
+  <title>Bài tập tổng hợp</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html" class="active"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Thực hành</div>
+        <h1>Bài tập tổng hợp</h1>
+        <p>Tổng hợp bài tập từ cơ bản đến nâng cao, mô phỏng tình huống thực tế trong công việc. Mỗi bài có lời giải chi tiết.</p>
+      </div>
+
+      <!-- Cơ bản -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🟢</span> Nhóm 1: Cơ bản (Chương 1-3)</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> BT1 – Phân tích đơn hàng siêu thị</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Bạn là nhân viên quản lý tại siêu thị MiniMart. Hãy phân tích dữ liệu đơn hàng tháng 1/2024.</p>
+              <p><strong>Dữ liệu mẫu:</strong></p>
+              <table class="excel-table">
+                <thead><tr><th>MaDH</th><th>Ngay</th><th>NhomHang</th><th>SanPham</th><th>SoLuong</th><th>DonGia</th><th>ThanhTien</th></tr></thead>
+                <tbody>
+                  <tr><td>MM001</td><td>02/01/2024</td><td>Thực phẩm</td><td>Gạo 5kg</td><td class="number">10</td><td class="number">120,000</td><td class="number">1,200,000</td></tr>
+                  <tr><td>MM002</td><td>02/01/2024</td><td>Đồ uống</td><td>Coca Cola</td><td class="number">24</td><td class="number">10,000</td><td class="number">240,000</td></tr>
+                  <tr><td>MM003</td><td>03/01/2024</td><td>Gia dụng</td><td>Nước rửa chén</td><td class="number">5</td><td class="number">35,000</td><td class="number">175,000</td></tr>
+                  <tr><td colspan="7" style="text-align:center">... (tạo thêm 30+ dòng tương tự)</td></tr>
+                </tbody>
+              </table>
+
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Chuyển dữ liệu thành Table, đặt tên <code>tblDonHang</code></li>
+                <li>Tạo PT: <strong>Doanh thu theo NhomHang</strong></li>
+                <li>Tạo PT: <strong>Doanh thu theo NhomHang và SanPham</strong> (2 fields trong Rows)</li>
+                <li>Tạo PT: <strong>Doanh thu theo Ngày</strong>, group theo tuần</li>
+                <li>Trả lời: Nhóm hàng nào bán chạy nhất? Ngày nào doanh thu cao nhất?</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans-bt1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans-bt1">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo Table (<kbd>Ctrl+T</kbd>), đặt tên <code>tblDonHang</code> trong Table Design</p></div></div>
+                <div class="step"><div class="step-content"><p>PT1: Insert → PivotTable → kéo NhomHang → Rows, ThanhTien → Values</p></div></div>
+                <div class="step"><div class="step-content"><p>PT2: Tạo PT mới → kéo NhomHang → Rows, SanPham → Rows (dưới NhomHang)</p></div></div>
+                <div class="step"><div class="step-content"><p>PT3: Kéo Ngay → Rows → click phải → Group → chọn Days, Number of days = 7</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> BT2 – Báo cáo nhân sự công ty</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Phòng HR cần báo cáo tổng quan nhân sự cho ban giám đốc.</p>
+              <p><strong>Dữ liệu:</strong> MaNV, HoTen, PhongBan (5 phòng), ChucVu (NV/TL/TP/GD), GioiTinh, NgaySinh, NgayVao, LuongCoBan — 30+ nhân viên</p>
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>PT: <strong>Số nhân viên theo PhongBan</strong> (Count)</li>
+                <li>PT: <strong>Lương trung bình theo PhongBan × ChucVu</strong> (Rows: PhongBan+ChucVu, Values: Average of Luong)</li>
+                <li>PT: <strong>Tỷ lệ giới tính theo PhongBan</strong> (Rows: PhongBan, Columns: GioiTinh, Values: Count of MaNV)</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans-bt2')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans-bt2">
+              <p>Tạo 3 PT riêng biệt. Lưu ý: để đếm nhân viên, kéo MaNV vào Values (tự động Count vì MaNV là Text). Để tính Average Luong: kéo LuongCoBan vào Values → click phải → Value Field Settings → chọn Average.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trung bình -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🟡</span> Nhóm 2: Trung bình (Chương 4-6)</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> BT3 – Phân tích chi tiết doanh thu bán hàng</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Giám đốc kinh doanh muốn biết chi tiết doanh thu, tỷ lệ đóng góp và xu hướng.</p>
+              <ol>
+                <li>Từ dữ liệu bán hàng, tạo PT: Rows = SanPham, Values = Sum of ThanhTien + <strong>% of Grand Total</strong> + <strong>Rank</strong></li>
+                <li>Sort theo doanh thu giảm dần</li>
+                <li>Áp dụng <strong>Value Filter: Top 5</strong></li>
+                <li>Format: Style Medium, Number format <code>#,##0 "₫"</code>, Tabular form</li>
+                <li>Thêm <strong>Slicer</strong> cho KhuVuc + <strong>Timeline</strong> cho NgayBan</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans-bt3')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans-bt3">
+              <h4>✅ Key points:</h4>
+              <ul>
+                <li>Kéo ThanhTien vào Values 3 lần → đổi lần 2 sang % of Grand Total, lần 3 sang Rank Largest to Smallest</li>
+                <li>Click phải cột giá trị → Sort → Largest to Smallest</li>
+                <li>Label dropdown → Value Filters → Top 10 → đổi thành Top 5 Items</li>
+                <li>PivotTable Analyze → Insert Slicer + Insert Timeline</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> BT4 – So sánh doanh thu tháng trước vs tháng này</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo dữ liệu bán hàng trong 6 tháng (T1-T6/2024)</li>
+                <li>PT: Rows = SanPham, Columns = NgayBan (group theo Month)</li>
+                <li>Values: Sum of ThanhTien</li>
+                <li>Thêm ThanhTien lần 2 → Show Values As: <strong>% Difference From Previous (Month)</strong></li>
+                <li>Trả lời: Sản phẩm nào tăng trưởng đều nhất? Sản phẩm nào giảm?</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans-bt4')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans-bt4">
+              <h4>✅ Hướng dẫn Show Values As:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Kéo ThanhTien vào Values lần 2</p></div></div>
+                <div class="step"><div class="step-content"><p>Click phải → Value Field Settings → tab <strong>Show Values As</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Chọn <strong>% Difference From</strong> → Base field: Ngay → Base item: <strong>(previous)</strong></p></div></div>
+              </div>
+              <p>Cột mới hiện % thay đổi so với tháng trước. Giá trị dương = tăng, âm = giảm.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nâng cao -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔴</span> Nhóm 3: Nâng cao (Chương 7-10)</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> BT5 – Power Pivot: Liên kết Đơn hàng - Sản phẩm - Khách hàng</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Công ty có 3 bảng dữ liệu riêng biệt, cần tạo báo cáo tổng hợp.</p>
+              <ol>
+                <li>Tạo 3 Tables:
+                  <ul>
+                    <li><strong>tblOrders:</strong> OrderID, CustomerID, ProductID, Qty, OrderDate (30 dòng)</li>
+                    <li><strong>tblProducts:</strong> ProductID, Name, Category, Price (8 sản phẩm)</li>
+                    <li><strong>tblCustomers:</strong> CustomerID, Name, City, Region (10 khách)</li>
+                  </ul>
+                </li>
+                <li>Tạo <strong>Relationships</strong> giữa 3 bảng</li>
+                <li>Tạo PT từ Data Model: Rows = Product Name + Category, Columns = City, Values = Sum of Qty</li>
+                <li><strong>Bonus DAX:</strong> Tạo Measure <code>Revenue := SUMX(tblOrders, tblOrders[Qty] * RELATED(tblProducts[Price]))</code></li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans-bt5')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans-bt5">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo 3 Tables trên 3 sheets → đặt tên phù hợp</p></div></div>
+                <div class="step"><div class="step-content"><p>Data → Relationships → New → tạo 2 relationships (Orders→Products, Orders→Customers)</p></div></div>
+                <div class="step"><div class="step-content"><p>Insert → PivotTable → tick "Add this data to the Data Model"</p></div></div>
+                <div class="step"><div class="step-content"><p>Trong PivotTable Fields → chuyển sang "ALL" → expand từng bảng → kéo fields</p></div></div>
+                <div class="step"><div class="step-content"><p>Mở Power Pivot window → Measures → New Measure → nhập công thức DAX</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> BT6 – Power Query: Gộp 12 file báo cáo tháng</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Mỗi chi nhánh gửi báo cáo Excel hàng tháng. Bạn cần gộp 12 file lại.</p>
+              <ol>
+                <li>Tạo <strong>3 file Excel</strong> giả lập (BaoCaoT1.xlsx, BaoCaoT2.xlsx, BaoCaoT3.xlsx) — cùng cấu trúc: Ngay, SanPham, SoLuong, DoanhThu</li>
+                <li>Đặt cả 3 file vào <strong>1 folder</strong></li>
+                <li>Dùng Power Query: <strong>Data → From Folder</strong> → Combine & Transform</li>
+                <li>Trong PQ Editor: đổi kiểu dữ liệu, xóa cột không cần, rename cột Source.Name thành "ThangBaoCao"</li>
+                <li><strong>Close & Load</strong> → Tạo Pivot Table từ dữ liệu gộp</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans-bt6')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans-bt6">
+              <h4>✅ Key steps:</h4>
+              <ul>
+                <li>From Folder → Combine & Transform Data → chọn Sheet1 trong mỗi file</li>
+                <li>PQ Editor: đổi kiểu Ngay sang Date, SoLuong sang Whole Number</li>
+                <li>Click phải cột Source.Name → Rename → "ThangBaoCao"</li>
+                <li>Có thể dùng Transform → Extract → Text Before Delimiter (".") để bỏ đuôi .xlsx</li>
+                <li>Close & Load → Insert PivotTable → phân tích theo tháng</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">🏆</span> BT7 – Dự án cuối: Sales Dashboard hoàn chỉnh</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>🏆 Đây là bài tập TỔNG HỢP — thể hiện toàn bộ kiến thức!</strong></p>
+              <p><strong>Yêu cầu:</strong> Xây dựng Sales Dashboard hoàn chỉnh với:</p>
+              <ol>
+                <li><strong>Dữ liệu:</strong> 100+ đơn hàng, 6 tháng, 3 khu vực, 10 sản phẩm, 6 nhân viên</li>
+                <li><strong>KPI Cards:</strong> Tổng doanh thu, Số đơn hàng, Doanh thu TB/đơn, Tăng trưởng %</li>
+                <li><strong>Charts:</strong>
+                  <ul>
+                    <li>Line: Doanh thu theo tháng</li>
+                    <li>Bar: Top 5 sản phẩm</li>
+                    <li>Doughnut: Tỷ lệ doanh thu theo khu vực</li>
+                    <li>Column: Doanh thu theo nhóm sản phẩm</li>
+                  </ul>
+                </li>
+                <li><strong>Table:</strong> Top 5 nhân viên (bảng formatted)</li>
+                <li><strong>Interactive:</strong> 2 Slicer (KhuVuc, NhomSP) + 1 Timeline → kết nối tất cả PT</li>
+                <li><strong>Hoàn thiện:</strong> Ẩn gridlines, ẩn sheets data, format chuyên nghiệp</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans-bt7')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans-bt7">
+              <h4>✅ Roadmap thực hiện:</h4>
+              <table class="styled-table">
+                <thead><tr><th>Bước</th><th>Chương tham khảo</th><th>Nội dung</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Chương 1</td><td>Chuẩn bị dữ liệu, chuyển Table</td></tr>
+                  <tr><td>2</td><td>Chương 2-3</td><td>Tạo 5 Pivot Tables trên sheets riêng</td></tr>
+                  <tr><td>3</td><td>Chương 4</td><td>Format PTs: Tabular, Number format</td></tr>
+                  <tr><td>4</td><td>Chương 5</td><td>Thêm % of Total, Rank, Calculated Fields</td></tr>
+                  <tr><td>5</td><td>Chương 6</td><td>Thêm Slicer + Timeline, kết nối Report Connections</td></tr>
+                  <tr><td>6</td><td>Chương 7</td><td>Tạo Pivot Charts, tùy chỉnh, ẩn Field Buttons</td></tr>
+                  <tr><td>7</td><td>Chương 10</td><td>Sắp xếp layout, KPI cards, hoàn thiện Dashboard</td></tr>
+                </tbody>
+              </table>
+              <div class="info-box tip">
+                <span class="box-icon">💡</span>
+                <div><strong>Pro tips:</strong> Dùng GETPIVOTDATA cho KPI cards. Kết nối Slicer với tất cả PT qua Report Connections. Protect sheet sau khi hoàn thành.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Keyboard Shortcuts Quick Reference -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">⌨️</span> Phím tắt Pivot Table quan trọng</h2>
+        <table class="styled-table">
+          <thead><tr><th>Phím tắt</th><th>Chức năng</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Alt + N + V</kbd></td><td>Insert PivotTable</td></tr>
+            <tr><td><kbd>Alt + F5</kbd></td><td>Refresh PivotTable hiện tại</td></tr>
+            <tr><td><kbd>Ctrl + Alt + F5</kbd></td><td>Refresh All</td></tr>
+            <tr><td><kbd>Alt + J + T</kbd></td><td>Mở tab PivotTable Analyze</td></tr>
+            <tr><td><kbd>Ctrl + T</kbd></td><td>Chuyển dữ liệu thành Table</td></tr>
+            <tr><td><kbd>Ctrl + -</kbd></td><td>Thu gọn nhóm (Collapse)</td></tr>
+            <tr><td><kbd>Ctrl + +</kbd></td><td>Mở rộng nhóm (Expand)</td></tr>
+            <tr><td><kbd>Alt + ↓</kbd></td><td>Mở dropdown filter</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="bai-tap">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong10.html"><small>← Chương trước</small> Dashboard thực tế</a>
+        <a href="index.html"><small>Quay lại →</small> Trang chủ</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

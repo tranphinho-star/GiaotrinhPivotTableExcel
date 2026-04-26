@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 6: Lọc, Sắp xếp & Slicer - Report Filter, Label/Value Filter, Slicer, Timeline">
+  <title>Chương 6: Lọc, Sắp xếp & Slicer</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html" class="active"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 06</div>
+        <h1>Lọc, Sắp xếp & Slicer</h1>
+        <p>Làm chủ các công cụ lọc dữ liệu: Report Filter, Label/Value Filter, Sort, Slicer và Timeline.</p>
+      </div>
+
+      <!-- 6.1 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔲</span> 6.1 Report Filter</h2>
+        <p>Report Filter là bộ lọc ở <strong>phía trên Pivot Table</strong>, lọc toàn bộ bảng theo 1 điều kiện.</p>
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Kéo field (ví dụ: KhuVuc) vào vùng <strong>Filters</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Dropdown xuất hiện phía trên PT → Click để chọn giá trị</p></div></div>
+          <div class="step"><div class="step-content"><p>Tick <strong>"Select Multiple Items"</strong> nếu muốn chọn nhiều giá trị</p></div></div>
+        </div>
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo:</strong> Report Filter hiển thị <strong>"(All)"</strong> khi không lọc, và <strong>"(Multiple Items)"</strong> khi chọn nhiều giá trị. Nhìn vào đây để biết đang lọc gì.</div>
+        </div>
+      </section>
+
+      <!-- 6.2 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🏷️</span> 6.2 Label Filter & Value Filter</h2>
+        <p>Lọc trực tiếp trên <strong>Row Labels</strong> hoặc <strong>Column Labels</strong>:</p>
+
+        <div class="card">
+          <h3>🏷️ Label Filter (Lọc theo nhãn)</h3>
+          <p>Click mũi tên ▼ cạnh Row Labels → <strong>Label Filters</strong>:</p>
+          <table class="styled-table">
+            <thead><tr><th>Điều kiện</th><th>Ví dụ</th></tr></thead>
+            <tbody>
+              <tr><td>Equals / Does Not Equal</td><td>SanPham = "Laptop"</td></tr>
+              <tr><td>Begins With / Ends With</td><td>Bắt đầu bằng "Đ" → Điện thoại</td></tr>
+              <tr><td>Contains / Does Not Contain</td><td>Chứa "Tab" → Tablet</td></tr>
+              <tr><td>Between</td><td>Giữa "A" và "L" (theo alphabet)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>📊 Value Filter (Lọc theo giá trị)</h3>
+          <p>Click mũi tên ▼ → <strong>Value Filters</strong>:</p>
+          <table class="styled-table">
+            <thead><tr><th>Điều kiện</th><th>Ví dụ</th></tr></thead>
+            <tbody>
+              <tr><td>Greater Than</td><td>Doanh thu > 10,000,000</td></tr>
+              <tr><td>Less Than or Equal</td><td>Doanh thu ≤ 50,000,000</td></tr>
+              <tr><td>Between</td><td>Doanh thu từ 10M đến 50M</td></tr>
+              <tr><td><strong>Top 10</strong></td><td>Top 5 sản phẩm doanh thu cao nhất</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box note">
+          <span class="box-icon">📌</span>
+          <div><strong>Top 10 Filter</strong> rất hữu ích: chọn Top/Bottom + số lượng + Items/Percent/Sum. Ví dụ: "Top 3 Items by Sum of ThanhTien" → chỉ hiện 3 sản phẩm bán chạy nhất.</div>
+        </div>
+      </section>
+
+      <!-- 6.3 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔀</span> 6.3 Sắp xếp (Sort)</h2>
+
+        <div class="card">
+          <h3>📋 Các cách Sort trong Pivot Table</h3>
+          <table class="styled-table">
+            <thead><tr><th>Cách</th><th>Thao tác</th><th>Kết quả</th></tr></thead>
+            <tbody>
+              <tr><td>Sort A→Z / Z→A</td><td>Click phải → Sort → chọn hướng</td><td>Sắp xếp theo nhãn (alphabet)</td></tr>
+              <tr><td>Sort by Value</td><td>Click phải vào cột Values → Sort → Largest to Smallest</td><td>Sắp xếp theo doanh thu cao→thấp</td></tr>
+              <tr><td>Manual Sort</td><td>Kéo thả item lên/xuống</td><td>Sắp xếp tùy ý</td></tr>
+              <tr><td>More Sort Options</td><td>Click phải → More Sort Options...</td><td>Cấu hình nâng cao</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo:</strong> Sort by Value (lớn→nhỏ) giúp bạn nhanh chóng thấy <strong>item quan trọng nhất lên đầu</strong>. Rất hữu ích khi trình bày cho sếp!</div>
+        </div>
+      </section>
+
+      <!-- 6.4 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎛️</span> 6.4 Slicer</h2>
+        <p><strong>Slicer</strong> là bộ lọc trực quan dạng nút bấm, giúp lọc dữ liệu nhanh và đẹp hơn Report Filter.</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Click vào Pivot Table → tab <strong>PivotTable Analyze</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Click <strong>Insert Slicer</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Tick các field muốn tạo Slicer (ví dụ: KhuVuc, SanPham)</p></div></div>
+          <div class="step"><div class="step-content"><p>Nhấn OK → Các Slicer panel xuất hiện</p></div></div>
+          <div class="step"><div class="step-content"><p>Click vào nút để lọc. Giữ <kbd>Ctrl</kbd> để chọn nhiều giá trị</p></div></div>
+        </div>
+
+        <div class="card">
+          <h3>🎨 Tùy chỉnh Slicer</h3>
+          <ul>
+            <li><strong>Style:</strong> Click Slicer → tab Slicer → chọn style màu sắc</li>
+            <li><strong>Columns:</strong> Slicer Settings → Number of columns (hiển thị nút theo nhiều cột)</li>
+            <li><strong>Size:</strong> Kéo góc để resize</li>
+            <li><strong>Kết nối nhiều PT:</strong> Click phải Slicer → <strong>Report Connections...</strong> → tick các PT muốn kết nối</li>
+          </ul>
+        </div>
+
+        <div class="info-box important">
+          <span class="box-icon">🔥</span>
+          <div><strong>Siêu mạnh:</strong> 1 Slicer có thể điều khiển <strong>nhiều Pivot Table cùng lúc</strong> → Đây là nền tảng để tạo Dashboard (Chương 10).</div>
+        </div>
+      </section>
+
+      <!-- 6.5 -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📅</span> 6.5 Timeline</h2>
+        <p><strong>Timeline</strong> là Slicer đặc biệt cho dữ liệu ngày tháng — dạng thanh trượt thời gian.</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Tab <strong>PivotTable Analyze</strong> → <strong>Insert Timeline</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn field ngày (NgayBan) → OK</p></div></div>
+          <div class="step"><div class="step-content"><p>Chọn cấp độ thời gian: <strong>Years, Quarters, Months, Days</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Click hoặc kéo thanh trượt để lọc theo khoảng thời gian</p></div></div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Mẹo:</strong> Timeline rất trực quan trên Dashboard. Người dùng chỉ cần kéo thanh trượt để xem dữ liệu từng tháng/quý/năm mà không cần hiểu Pivot Table.</div>
+        </div>
+      </section>
+
+      <!-- 6.6 Bài tập -->
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 6.6 Bài tập thực hành</h2>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 6.1 – Slicer theo vùng miền</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Tình huống:</strong> Giám đốc muốn xem nhanh doanh thu theo khu vực bằng cách click nút.</p>
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo Pivot Table: Rows = SanPham, Values = Sum of ThanhTien</li>
+                <li>Insert <strong>Slicer</strong> cho KhuVuc</li>
+                <li>Đổi style Slicer sang màu xanh lá (phù hợp báo cáo)</li>
+                <li>Thiết lập Slicer hiển thị <strong>3 cột</strong></li>
+                <li>Test: Click "Bắc" → xem PT thay đổi, Click "Nam" → xem PT thay đổi</li>
+                <li>Thêm <strong>Timeline</strong> cho NgayBan → lọc theo tháng 1/2024</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo PT → Kéo SanPham → Rows, ThanhTien → Values</p></div></div>
+                <div class="step"><div class="step-content"><p>PivotTable Analyze → Insert Slicer → tick KhuVuc → OK</p></div></div>
+                <div class="step"><div class="step-content"><p>Click Slicer → Slicer tab → chọn style xanh lá</p></div></div>
+                <div class="step"><div class="step-content"><p>Slicer tab → Columns: nhập <strong>3</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>PivotTable Analyze → Insert Timeline → tick NgayBan → OK</p></div></div>
+                <div class="step"><div class="step-content"><p>Trên Timeline, chọn cấp "Months" → click vào Jan 2024</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 6.2 – Top 3 sản phẩm bán chạy</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo PT: Rows = SanPham, Values = Sum of ThanhTien</li>
+                <li>Sort: Sắp xếp theo doanh thu từ cao xuống thấp</li>
+                <li>Áp dụng <strong>Value Filter → Top 10</strong>: Top 3 Items</li>
+                <li>Kết quả: chỉ hiện 3 sản phẩm có doanh thu cao nhất</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans2')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans2">
+              <h4>✅ Hướng dẫn:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo PT bình thường với SanPham ở Rows</p></div></div>
+                <div class="step"><div class="step-content"><p>Click phải vào cột doanh thu → Sort → <strong>Largest to Smallest</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Click mũi tên ▼ bên Row Labels → <strong>Value Filters → Top 10...</strong></p></div></div>
+                <div class="step"><div class="step-content"><p>Đổi thành: Top <strong>3</strong> Items by Sum of ThanhTien → OK</p></div></div>
+              </div>
+              <p>Chỉ còn 3 sản phẩm: Điện thoại, Laptop, Tablet (theo dữ liệu mẫu).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong6">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong5.html"><small>← Chương trước</small> Tính toán nâng cao</a>
+        <a href="chuong7.html"><small>Chương tiếp →</small> Pivot Chart</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

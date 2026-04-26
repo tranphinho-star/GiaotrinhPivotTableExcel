@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 8: Power Pivot & Data Model - Relationships, DAX cơ bản, CALCULATE, SUMX">
+  <title>Chương 8: Power Pivot & Data Model</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html" class="active"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 08</div>
+        <h1>Power Pivot & Data Model</h1>
+        <p>Nâng cấp Pivot Table lên tầm cao mới: liên kết nhiều bảng dữ liệu, viết công thức DAX, và xử lý hàng triệu dòng.</p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">⚡</span> 8.1 Power Pivot là gì?</h2>
+        <p><strong>Power Pivot</strong> là add-in miễn phí trong Excel (có sẵn từ Excel 2016+) mở rộng khả năng của Pivot Table thông thường.</p>
+
+        <div class="card">
+          <h3>📊 So sánh Pivot Table thường vs Power Pivot</h3>
+          <table class="styled-table">
+            <thead><tr><th>Tính năng</th><th>Pivot Table thường</th><th>Power Pivot</th></tr></thead>
+            <tbody>
+              <tr><td>Nguồn dữ liệu</td><td>1 bảng duy nhất</td><td class="highlight"><strong>Nhiều bảng liên kết</strong></td></tr>
+              <tr><td>Số dòng tối đa</td><td>~1,048,576 dòng</td><td class="highlight"><strong>Hàng trăm triệu dòng</strong></td></tr>
+              <tr><td>Công thức</td><td>Calculated Field (đơn giản)</td><td class="highlight"><strong>DAX (mạnh mẽ)</strong></td></tr>
+              <tr><td>Relationships</td><td>Không</td><td class="highlight"><strong>Có (giống SQL)</strong></td></tr>
+              <tr><td>KPIs</td><td>Không</td><td class="highlight"><strong>Có</strong></td></tr>
+              <tr><td>Nén dữ liệu</td><td>Không</td><td class="highlight"><strong>Có (tiết kiệm RAM)</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-box note">
+          <span class="box-icon">📌</span>
+          <div><strong>Khi nào dùng Power Pivot?</strong> Khi dữ liệu có <strong>nhiều bảng</strong> cần liên kết (ví dụ: Orders + Products + Customers), hoặc cần tính toán phức tạp hơn Calculated Field.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🔗</span> 8.2 Data Model & Relationships</h2>
+        <p><strong>Data Model</strong> là nơi chứa tất cả bảng dữ liệu và mối quan hệ giữa chúng (giống database).</p>
+
+        <h3>Ví dụ: Hệ thống bán hàng 3 bảng</h3>
+        <div class="card">
+          <h3>📋 Bảng Orders (Đơn hàng)</h3>
+          <table class="excel-table">
+            <thead><tr><th>OrderID</th><th>CustomerID</th><th>ProductID</th><th>Quantity</th><th>OrderDate</th></tr></thead>
+            <tbody>
+              <tr><td>1001</td><td>C01</td><td>P01</td><td class="number">5</td><td>15/01/2024</td></tr>
+              <tr><td>1002</td><td>C02</td><td>P03</td><td class="number">2</td><td>18/01/2024</td></tr>
+              <tr><td>1003</td><td>C01</td><td>P02</td><td class="number">10</td><td>22/01/2024</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>📋 Bảng Products (Sản phẩm)</h3>
+          <table class="excel-table">
+            <thead><tr><th>ProductID</th><th>ProductName</th><th>Category</th><th>UnitPrice</th></tr></thead>
+            <tbody>
+              <tr><td>P01</td><td>Laptop Dell</td><td>Electronics</td><td class="number">15,000,000</td></tr>
+              <tr><td>P02</td><td>Chuột Logitech</td><td>Accessories</td><td class="number">500,000</td></tr>
+              <tr><td>P03</td><td>Màn hình LG</td><td>Electronics</td><td class="number">6,000,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>📋 Bảng Customers (Khách hàng)</h3>
+          <table class="excel-table">
+            <thead><tr><th>CustomerID</th><th>CustomerName</th><th>City</th></tr></thead>
+            <tbody>
+              <tr><td>C01</td><td>Công ty ABC</td><td>Hà Nội</td></tr>
+              <tr><td>C02</td><td>Công ty XYZ</td><td>TP.HCM</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Tạo Relationships</h3>
+        <div class="steps">
+          <div class="step"><div class="step-content"><p>Chuyển 3 bảng thành Table (<kbd>Ctrl + T</kbd>) → đặt tên: <code>tblOrders</code>, <code>tblProducts</code>, <code>tblCustomers</code></p></div></div>
+          <div class="step"><div class="step-content"><p>Tab <strong>Data</strong> → <strong>Relationships</strong> → <strong>New...</strong></p></div></div>
+          <div class="step"><div class="step-content"><p>Relationship 1: <code>tblOrders[ProductID]</code> → <code>tblProducts[ProductID]</code></p></div></div>
+          <div class="step"><div class="step-content"><p>Relationship 2: <code>tblOrders[CustomerID]</code> → <code>tblCustomers[CustomerID]</code></p></div></div>
+          <div class="step"><div class="step-content"><p>Tạo PivotTable: Insert → PivotTable → tick <strong>"Add this data to the Data Model"</strong></p></div></div>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Kết quả:</strong> Bây giờ bạn có thể kéo <strong>ProductName</strong> từ bảng Products, <strong>CustomerName</strong> từ bảng Customers vào cùng 1 Pivot Table! Không cần VLOOKUP.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📐</span> 8.3 DAX cơ bản</h2>
+        <p><strong>DAX</strong> (Data Analysis Expressions) là ngôn ngữ công thức của Power Pivot, mạnh hơn Calculated Field rất nhiều.</p>
+
+        <div class="card">
+          <h3>📊 Các hàm DAX cơ bản</h3>
+          <table class="styled-table">
+            <thead><tr><th>Hàm DAX</th><th>Chức năng</th><th>Ví dụ</th></tr></thead>
+            <tbody>
+              <tr><td><code>SUM()</code></td><td>Tổng cộng</td><td><code>=SUM(Orders[Quantity])</code></td></tr>
+              <tr><td><code>AVERAGE()</code></td><td>Trung bình</td><td><code>=AVERAGE(Orders[Quantity])</code></td></tr>
+              <tr><td><code>COUNT() / COUNTA()</code></td><td>Đếm</td><td><code>=COUNT(Orders[OrderID])</code></td></tr>
+              <tr><td><code>DISTINCTCOUNT()</code></td><td>Đếm giá trị duy nhất</td><td><code>=DISTINCTCOUNT(Orders[CustomerID])</code></td></tr>
+              <tr><td><code>RELATED()</code></td><td>Lấy giá trị từ bảng liên kết</td><td><code>=RELATED(Products[UnitPrice])</code></td></tr>
+              <tr><td><code>CALCULATE()</code></td><td>Tính toán với filter context</td><td><code>=CALCULATE(SUM(Orders[Revenue]), Products[Category]="Electronics")</code></td></tr>
+              <tr><td><code>SUMX()</code></td><td>Tính tổng từng dòng rồi cộng lại</td><td><code>=SUMX(Orders, Orders[Quantity] * RELATED(Products[UnitPrice]))</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>💡 Ví dụ: Tính Revenue bằng DAX</h3>
+          <p>Thay vì thêm cột Revenue trong bảng Orders, dùng <strong>Measure</strong> DAX:</p>
+          <div class="code-block">
+Total Revenue := SUMX(Orders, Orders[Quantity] * RELATED(Products[UnitPrice]))
+          </div>
+          <p>Measure này tính: cho mỗi dòng Orders, lấy Quantity × UnitPrice (từ bảng Products qua relationship), rồi tổng tất cả.</p>
+        </div>
+
+        <div class="info-box warning">
+          <span class="box-icon">⚠️</span>
+          <div><strong>CALCULATE vs SUMX:</strong> <code>CALCULATE</code> thay đổi filter context (lọc trước rồi tính). <code>SUMX</code> lặp qua từng dòng rồi tính. Kết hợp cả 2 tạo ra tính toán rất mạnh.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 8.4 Bài tập thực hành</h2>
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 8.1 – Liên kết 3 bảng</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li>Tạo 3 bảng: Orders (20 dòng), Products (5 sản phẩm), Customers (5 khách hàng)</li>
+                <li>Chuyển thành Table, đặt tên phù hợp</li>
+                <li>Tạo Relationships: Orders↔Products (ProductID), Orders↔Customers (CustomerID)</li>
+                <li>Tạo Pivot Table từ Data Model</li>
+                <li>Kéo: Rows = ProductName (bảng Products), Columns = City (bảng Customers), Values = Sum of Quantity</li>
+                <li>Kết quả: Bảng crosstab sản phẩm × thành phố — không cần VLOOKUP!</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Key steps:</h4>
+              <div class="steps">
+                <div class="step"><div class="step-content"><p>Tạo 3 Tables trên 3 sheets khác nhau</p></div></div>
+                <div class="step"><div class="step-content"><p>Data → Relationships → New → tạo 2 relationships</p></div></div>
+                <div class="step"><div class="step-content"><p>Insert → PivotTable → tick "Add this data to the Data Model"</p></div></div>
+                <div class="step"><div class="step-content"><p>Trong PivotTable Fields: chọn "ALL" ở phía trên → thấy cả 3 bảng</p></div></div>
+                <div class="step"><div class="step-content"><p>Expand bảng Products → kéo ProductName → Rows</p></div></div>
+                <div class="step"><div class="step-content"><p>Expand bảng Customers → kéo City → Columns</p></div></div>
+                <div class="step"><div class="step-content"><p>Expand bảng Orders → kéo Quantity → Values</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong8">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong7.html"><small>← Chương trước</small> Pivot Chart</a>
+        <a href="chuong9.html"><small>Chương tiếp →</small> Power Query</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>

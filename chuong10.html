@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chương 10: Dashboard thực tế - Thiết kế Dashboard chuyên nghiệp với Pivot Table, Pivot Chart, Slicer">
+  <title>Chương 10: Dashboard thực tế</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="auth.js"></script>
+</head>
+<body>
+  <button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+  <div class="page-wrapper">
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-header"><div class="logo">PT</div><h2>Pivot Table Excel<small>Từ cơ bản đến nâng cao</small></h2></div>
+      <div class="sidebar-nav">
+        <a href="index.html"><span class="nav-icon">🏠</span> Trang chủ</a><div class="nav-divider"></div>
+        <a href="chuong1.html"><span class="nav-icon">📘</span> Chương 1: Giới thiệu <span class="nav-num">01</span></a>
+        <a href="chuong2.html"><span class="nav-icon">🚀</span> Chương 2: Tạo PT đầu tiên <span class="nav-num">02</span></a>
+        <a href="chuong3.html"><span class="nav-icon">🧩</span> Chương 3: Cấu trúc & Kéo thả <span class="nav-num">03</span></a>
+        <a href="chuong4.html"><span class="nav-icon">🎨</span> Chương 4: Định dạng <span class="nav-num">04</span></a>
+        <a href="chuong5.html"><span class="nav-icon">🔢</span> Chương 5: Tính toán <span class="nav-num">05</span></a>
+        <a href="chuong6.html"><span class="nav-icon">🔍</span> Chương 6: Lọc & Slicer <span class="nav-num">06</span></a>
+        <a href="chuong7.html"><span class="nav-icon">📊</span> Chương 7: Pivot Chart <span class="nav-num">07</span></a>
+        <a href="chuong8.html"><span class="nav-icon">⚡</span> Chương 8: Power Pivot <span class="nav-num">08</span></a>
+        <a href="chuong9.html"><span class="nav-icon">🔄</span> Chương 9: Power Query <span class="nav-num">09</span></a>
+        <a href="chuong10.html" class="active"><span class="nav-icon">📋</span> Chương 10: Dashboard <span class="nav-num">10</span></a>
+        <div class="nav-divider"></div>
+        <a href="bai-tap.html"><span class="nav-icon">🎯</span> Bài tập thực hành</a>
+      </div>
+    </nav>
+
+    <main class="main-content content">
+      <div class="chapter-header">
+        <div class="ch-num">Chương 10</div>
+        <h1>Dashboard thực tế</h1>
+        <p>Kết hợp Pivot Table + Pivot Chart + Slicer + Timeline để tạo Dashboard chuyên nghiệp như BI tool.</p>
+      </div>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📋</span> 10.1 Dashboard là gì?</h2>
+        <p><strong>Dashboard</strong> (Bảng điều khiển) là trang tổng hợp hiển thị các chỉ số quan trọng (KPIs) dưới dạng biểu đồ và bảng, giúp người dùng nắm bắt tình hình <strong>chỉ trong vài giây</strong>.</p>
+
+        <div class="card">
+          <h3>🎯 Nguyên tắc thiết kế Dashboard</h3>
+          <ol>
+            <li><strong>Ít hơn là nhiều hơn:</strong> Tối đa 6-8 biểu đồ/bảng</li>
+            <li><strong>KPIs nổi bật:</strong> Các chỉ số chính (doanh thu, % tăng trưởng) ở vị trí dễ thấy nhất</li>
+            <li><strong>Nhất quán:</strong> Cùng font, cùng màu, cùng style xuyên suốt</li>
+            <li><strong>Interactive:</strong> Slicer + Timeline để người dùng tự khám phá</li>
+            <li><strong>1 trang:</strong> Toàn bộ Dashboard trên 1 sheet, không cần cuộn</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🏗️</span> 10.2 Các bước xây dựng Dashboard</h2>
+
+        <div class="steps">
+          <div class="step"><div class="step-content"><p><strong>Chuẩn bị dữ liệu:</strong> Dùng Power Query (Chương 9) để import, làm sạch, kết hợp dữ liệu</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Tạo Data Model:</strong> Thiết lập Relationships giữa các bảng (Chương 8)</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Tạo Pivot Tables:</strong> Tạo nhiều PT cho từng phần Dashboard (trên sheet ẩn)</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Tạo Pivot Charts:</strong> Tạo chart từ mỗi PT, chọn loại chart phù hợp (Chương 7)</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Thiết kế layout:</strong> Tạo sheet "Dashboard" riêng, sắp xếp charts + KPIs</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Thêm Slicer + Timeline:</strong> Kết nối tất cả PT với cùng Slicer/Timeline</p></div></div>
+          <div class="step"><div class="step-content"><p><strong>Hoàn thiện:</strong> Ẩn gridlines, ẩn sheet data, protect sheet, format cuối cùng</p></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📊</span> 10.3 Ví dụ: Sales Dashboard</h2>
+
+        <div class="card">
+          <h3>📋 Bố cục Sales Dashboard</h3>
+          <table class="styled-table">
+            <thead><tr><th>Vùng</th><th>Nội dung</th><th>Loại</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Trên cùng</strong></td><td>Tổng doanh thu, Số đơn hàng, TB đơn hàng, Tăng trưởng %</td><td>KPI Cards (ô tổng hợp)</td></tr>
+              <tr><td><strong>Giữa trái</strong></td><td>Doanh thu theo tháng</td><td>Line Chart</td></tr>
+              <tr><td><strong>Giữa phải</strong></td><td>Doanh thu theo sản phẩm</td><td>Bar Chart (horizontal)</td></tr>
+              <tr><td><strong>Dưới trái</strong></td><td>Doanh thu theo khu vực</td><td>Pie/Doughnut Chart</td></tr>
+              <tr><td><strong>Dưới phải</strong></td><td>Top 5 nhân viên</td><td>Table (Pivot Table formatted)</td></tr>
+              <tr><td><strong>Cạnh phải</strong></td><td>Slicer: Khu vực, Sản phẩm, Nhân viên</td><td>Slicer panels</td></tr>
+              <tr><td><strong>Trên cùng phải</strong></td><td>Timeline: Chọn tháng/quý</td><td>Timeline control</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Tạo KPI Cards</h3>
+        <div class="card">
+          <h3>📊 KPI Cards bằng công thức GETPIVOTDATA</h3>
+          <p>Tạo ô KPI bằng công thức lấy dữ liệu từ Pivot Table:</p>
+          <div class="code-block">
+=GETPIVOTDATA("ThanhTien", 'PT_Data'!A3)        → Tổng doanh thu
+=GETPIVOTDATA("MaDH", 'PT_Count'!A3)            → Số đơn hàng
+=GETPIVOTDATA("ThanhTien",'PT_Data'!A3) / GETPIVOTDATA("MaDH",'PT_Count'!A3)  → TB/đơn
+          </div>
+          <p>Format các ô KPI: font size lớn (28pt), màu nổi bật, viền đẹp mắt.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎨</span> 10.4 Hoàn thiện Dashboard</h2>
+
+        <div class="card">
+          <h3>✅ Checklist hoàn thiện</h3>
+          <ul>
+            <li>☐ <strong>Ẩn gridlines:</strong> View → bỏ tick Gridlines</li>
+            <li>☐ <strong>Ẩn row/column headers:</strong> View → bỏ tick Headings</li>
+            <li>☐ <strong>Đặt background:</strong> Tô màu nền cho toàn bộ sheet (chọn màu tối hoặc xám nhạt)</li>
+            <li>☐ <strong>Ẩn sheet dữ liệu:</strong> Click phải tab sheet → Hide</li>
+            <li>☐ <strong>Protect sheet:</strong> Review → Protect Sheet (chỉ cho phép sử dụng Slicer)</li>
+            <li>☐ <strong>Ẩn Field Buttons:</strong> PivotChart Analyze → Hide All</li>
+            <li>☐ <strong>Remove scroll bars:</strong> File → Options → Advanced → bỏ tick scroll bars</li>
+            <li>☐ <strong>Freeze panes:</strong> Nếu Dashboard dài hơn 1 màn hình → View → Freeze Panes</li>
+          </ul>
+        </div>
+
+        <div class="info-box tip">
+          <span class="box-icon">💡</span>
+          <div><strong>Pro tip:</strong> Dùng <strong>zoom 80-85%</strong> để toàn bộ Dashboard vừa 1 màn hình. Kết hợp với <strong>Page Layout view</strong> để kiểm tra in ấn.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">📊</span> 10.5 Các mẫu Dashboard khác</h2>
+
+        <div class="card">
+          <h3>👥 HR Dashboard (Nhân sự)</h3>
+          <ul>
+            <li><strong>KPIs:</strong> Tổng nhân viên, Tỷ lệ nghỉ việc, Lương trung bình</li>
+            <li><strong>Charts:</strong> Pie: Giới tính | Bar: Phòng ban | Line: Biến động nhân sự theo tháng</li>
+            <li><strong>Slicer:</strong> Phòng ban, Chức vụ, Giới tính</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>📦 Inventory Dashboard (Kho)</h3>
+          <ul>
+            <li><strong>KPIs:</strong> Tổng tồn kho, Giá trị tồn kho, Số SKU hết hàng</li>
+            <li><strong>Charts:</strong> Bar: Tồn kho theo nhóm | Line: Xu hướng nhập/xuất | Table: Hàng sắp hết</li>
+            <li><strong>Slicer:</strong> Nhóm hàng, Nhà cung cấp, Kho</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>💰 Finance Dashboard (Tài chính)</h3>
+          <ul>
+            <li><strong>KPIs:</strong> Doanh thu, Chi phí, Lợi nhuận, Biên lợi nhuận %</li>
+            <li><strong>Charts:</strong> Combo: Doanh thu (cột) + Biên LN (đường) | Waterfall: Phân tích chi phí</li>
+            <li><strong>Slicer:</strong> Danh mục chi phí, Dự án, Quý</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title"><span class="icon">🎯</span> 10.6 Bài tập thực hành</h2>
+        <div class="exercise">
+          <div class="exercise-header"><span class="ex-icon">📝</span> Bài tập 10.1 – Xây dựng Sales Dashboard hoàn chỉnh</div>
+          <div class="exercise-body">
+            <div class="requirement">
+              <p><strong>Đây là bài tập tổng hợp của toàn bộ giáo trình!</strong></p>
+              <p><strong>Yêu cầu:</strong></p>
+              <ol>
+                <li><strong>Dữ liệu:</strong> Tạo bảng bán hàng 100+ đơn hàng (MaDH, Ngay, KhuVuc, NhanVien, SanPham, NhomSP, SoLuong, DonGia, ThanhTien) — trong 6 tháng, 3 khu vực, 10 sản phẩm, 6 nhân viên</li>
+                <li><strong>Chuyển thành Table</strong> → Insert → PivotTable</li>
+                <li><strong>Tạo 5 Pivot Tables</strong> trên sheet riêng (ẩn sau):<br>
+                  PT1: Doanh thu theo tháng | PT2: Doanh thu theo sản phẩm | PT3: Doanh thu theo khu vực | PT4: Top 5 NV | PT5: Doanh thu theo NhomSP</li>
+                <li><strong>Tạo Pivot Charts:</strong> PT1→Line | PT2→Bar | PT3→Doughnut | PT5→Column</li>
+                <li><strong>Sheet Dashboard:</strong> Sắp xếp charts + KPI cards theo layout mẫu</li>
+                <li><strong>Thêm Slicer</strong> (KhuVuc, NhomSP) + <strong>Timeline</strong> (Ngay) → kết nối tất cả PT</li>
+                <li><strong>Hoàn thiện:</strong> Ẩn gridlines, ẩn sheet data, format đẹp mắt</li>
+              </ol>
+            </div>
+            <button class="answer-toggle" onclick="toggleAnswer('ans1')">👁️ Xem đáp án</button>
+            <div class="answer-content" id="ans1">
+              <h4>✅ Hướng dẫn tổng quát:</h4>
+              <p>Bài này kết hợp kiến thức từ <strong>tất cả các chương</strong>:</p>
+              <ul>
+                <li><strong>Chương 1:</strong> Chuẩn bị dữ liệu đúng cách, chuyển thành Table</li>
+                <li><strong>Chương 2-3:</strong> Tạo Pivot Tables, kéo thả fields</li>
+                <li><strong>Chương 4:</strong> Định dạng PT với styles phù hợp</li>
+                <li><strong>Chương 5:</strong> Tạo Calculated Field cho KPIs (LoiNhuan, TyLe...)</li>
+                <li><strong>Chương 6:</strong> Thêm Slicer + Timeline, kết nối Report Connections</li>
+                <li><strong>Chương 7:</strong> Tạo Pivot Charts, tùy chỉnh, ẩn Field Buttons</li>
+              </ul>
+              <div class="info-box tip">
+                <span class="box-icon">💡</span>
+                <div><strong>Kết nối Slicer:</strong> Click phải → Report Connections → tick TẤT CẢ Pivot Tables. Khi click 1 nút trên Slicer → tất cả charts thay đổi cùng lúc!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Notes -->
+      <section class="notes-section" id="notes-section" data-page="chuong10">
+        <h2 class="section-title"><span class="icon">📝</span> Ghi chú của bạn <span class="notes-count-badge"><span class="notes-count">0</span></span></h2>
+        <form class="notes-form">
+          <textarea class="notes-input" placeholder="Viết ghi chú tại đây..." rows="1"></textarea>
+          <button type="submit" class="notes-submit">💾 Lưu</button>
+        </form>
+        <div class="notes-list"></div>
+      </section>
+
+      <div class="chapter-nav-bottom">
+        <a href="chuong9.html"><small>← Chương trước</small> Power Query</a>
+        <a href="bai-tap.html"><small>Tiếp theo →</small> Bài tập tổng hợp</a>
+      </div>
+    </main>
+  </div>
+  <script>
+    function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+    function toggleAnswer(id){document.getElementById(id).classList.toggle('show');}
+  </script>
+  <script src="notes.js"></script>
+</body>
+</html>
